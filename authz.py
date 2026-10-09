@@ -61,6 +61,8 @@ class PolicyEngine:
             self._revoked_subjects.add(subject)
 
     def restore_subject(self, subject: str) -> None:
+        if not isinstance(subject, str) or not subject.strip():
+            raise ValueError("subject must be a non-empty string")
         with self._lock:
             self._revoked_subjects.discard(subject)
 
