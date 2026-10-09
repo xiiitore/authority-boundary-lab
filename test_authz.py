@@ -27,6 +27,12 @@ class PolicyEngineTests(unittest.TestCase):
         self.policy.restore_subject("alice")
         self.assertTrue(self.policy.authorize(self.reader, "read", "reports"))
 
+    def test_restore_rejects_invalid_subject(self):
+        for subject in ("", " ", None, 42):
+            with self.subTest(subject=subject):
+                with self.assertRaises(ValueError):
+                    self.policy.restore_subject(subject)
+
     def test_require_raises_without_leaking_policy_details(self):
         with self.assertRaisesRegex(AuthorizationError, "^access denied$"):
             self.policy.require(self.reader, "delete", "reports")
