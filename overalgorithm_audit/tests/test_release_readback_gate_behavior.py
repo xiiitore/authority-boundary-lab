@@ -12,7 +12,7 @@ BASE = dict(
 class ReleaseReadbackGateBehaviorTests(unittest.TestCase):
     def test_release_gate_skill_documents_runtime_policy_evidence_rule(self):
         skill = (Path(__file__).parents[1] / 'skills' / '07-release-gate' / 'SKILL.md').read_text()
-        self.assertIn('# Release Gate v1.2.11', skill)
+        self.assertIn('# Release Gate v1.2.12', skill)
         self.assertIn('runtime_policy_evidence_refs', skill)
         self.assertIn('yields UNKNOWN, not PASS', skill)
 
