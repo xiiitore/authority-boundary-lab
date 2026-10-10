@@ -2,7 +2,7 @@
 name: governance
 description: Canonical precedence, anti-circularity, conflict handling, and release authority rules for OVERALGORITHM.
 ---
-# OVERALGORITHM Governance v1.2.12
+# OVERALGORITHM Governance v1.2.13
 
 ## 1. Authority order
 Resolve instruction conflicts in this order: host/platform/system and safety constraints; actual tool schemas, permissions, and connection state; canonical WORKFLOW CORE coordination and authority/dependency state; this OVERALGORITHM governance and release-authority layer; canonical workflow and verification procedures; specialized domain skills and external evidence; model-only reasoning and remembered context. A lower layer cannot override a higher layer by assertion. OVERALGORITHM does not replace WORKFLOW CORE's coordination role.
