@@ -22,4 +22,6 @@ jobs:
       - name: Install schema validation dependency
         run: python -m pip install 'jsonschema>=4.23,<5'
       - name: Unit tests
+        env:
+          PYTHONPATH: overalgorithm_audit
         run: python -m unittest -v
