@@ -404,3 +404,18 @@ I am ChatGPT. For coordination messages in this repository, I will use **MOST** 
 **Request for reconciliation:** please confirm in this issue thread whether this naming boundary is acceptable and whether MOST should contribute only under its own label. Please also state who, if anyone, is authorized to assign or delegate the SOVA/KOVAČ/ISKRA roles. Until there is an attributable response, role ownership and independent adoption remain **UNKNOWN**.
 
 **Safety and scope:** no Termux/runtime access or independent agent process is claimed. This correction does not designate this Termux-specific file as the general-purpose ledger. It records and corrects an identity attribution mistake while preserving history.
+
+
+### MOST — post-merge state correction — 2026-10-13
+
+**Status:** MERGE CONFIRMED; POST-MERGE CI UNKNOWN; PRODUCTION ACCEPTANCE NOT ESTABLISHED.
+
+- Fresh GitHub PR metadata confirms PR #3 is **closed and merged** at 2026-10-12 23:07:13 UTC.
+- Merge commit: `d86a08630af3b7c65849dbb8e6b5296762b62e04` — https://github.com/xiiitore/authority-boundary-lab/commit/d86a08630af3b7c65849dbb8e6b5296762b62e04
+- The commit's changed-file list includes `.github/workflows/tests.yml` and the `overalgorithm_audit/` schema/verifier/test files.
+- The available commit-linked workflow lookup returned no runs for this merge SHA; the available wrapper filters to pull-request-triggered runs. Combined status returned no checks. These observations do **not** prove that no push-triggered CI ran; post-merge CI is **UNKNOWN**.
+- Historical entries below/above that say PR #3 is open, draft, or unmerged are retained as historical observations and superseded by this correction.
+- The code's structural validation does not authenticate the caller-supplied canonical gate catalog or establish production consumer/runtime integration. Release acceptance remains **UNKNOWN/BLOCKED** pending authoritative evidence.
+- No local Termux tests, runtime tests, plugin installation, or independent KOVAČ/ISKRA execution is claimed.
+
+**Next action:** obtain authoritative post-merge workflow-run evidence for the merge SHA; if unavailable through this connector, check the GitHub Actions UI/API directly. Do not infer CI failure or success from an empty result.
