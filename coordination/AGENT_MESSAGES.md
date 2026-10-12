@@ -243,3 +243,26 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 **Decision:** the corrected audit-branch change has successful CI evidence on all three listed Python versions. Overall production acceptance remains BLOCKED/UNKNOWN. Keep PR #3 draft and unmerged.
 
 **Next action:** continue only if a new commit, CI result, distinct-method review, or repository-owner decision appears. Do not duplicate the existing PR comment asking for an ISKRA challenge.
+
+
+### MSG-20261012-SOVA-LOOP-TEMPO-01 — bounded polling, ownership, and no-op discipline
+
+**Status:** PROPOSED COORDINATION RULES RECORDED; adoption by other runtimes/roles is UNKNOWN until they read back and acknowledge them.
+
+**Problem observed:** a rapid series of coordination-only commits and push-triggered workflow runs can create churn, obscure the actual technical change, and make a scan trigger more scans. Repeating a read without a material state change is not progress.
+
+**Effective loop rules for this coordination workflow**
+1. **One cycle, one owner:** each active turn names one coordinator/owner and one bounded objective. Logical roles SOVA/KOVAČ/ISKRA are not presumed to be separate live agents. Never wait for an unobservable role or claim its approval; continue only the safe work actually available.
+2. **Read → compare → act once → verify → hand off:** take a fresh snapshot of the relevant source(s), record the commit/head/run identifiers, compare against the last observed snapshot, and perform at most one bounded action for the current objective. Re-read after a write to verify it. Do not launch overlapping loops against the same file or task.
+3. **No-op means stop:** if head SHA, relevant file content, PR state, CI state, and outstanding acceptance criteria are unchanged, do not append a new ledger entry or create a commit just to record another scan. Report “NO MATERIAL CHANGE; STOPPED” in the active conversation instead.
+4. **Write only on state transitions:** append a ledger entry only when there is a material new finding, changed status, corrected error, new decision/blocker, owner handoff, or reproducible evidence that changes the conclusion. Batch related findings into one entry/commit. Do not commit each intermediate read or routine poll.
+5. **Trigger-aware tempo:** after a push-triggered workflow, wait for that run to complete and inspect its result before another write. A workflow run caused solely by a coordination-ledger append does not justify another append. Never create a commit solely to provoke another workflow or to keep a loop alive.
+6. **Bound each cycle:** default maximum is one source refresh and one post-action read-back per source per cycle. If a run is pending, inspect that exact run rather than repeatedly listing all runs. If an external state is still pending, hand off or stop; do not busy-poll. Resume on a concrete event (new commit/head, completed CI run, review response, explicit owner instruction) or a later user turn.
+7. **Single-writer discipline:** before editing, fetch the current file SHA and content. If another write wins the race or the SHA changes, re-fetch and reconcile; never overwrite concurrent work from a stale snapshot. Do not edit the same path concurrently from multiple loops.
+8. **Keep task boundaries clean:** use `coordination/AGENT_MESSAGES.md` for general coordination; keep `coordination/CHATGPT_CODEX_TERMUX_HANDOFF.md` scoped to the Termux PermissionError investigation. PR #3 stays draft/unmerged unless the repository owner explicitly authorizes a release decision.
+9. **Evidence and statuses:** distinguish observed facts, hypotheses, and unknowns. Tool execution, a successful read-back, or CI alone does not prove independent review, production integration, or release acceptance. Use PASS only for the bounded criteria actually verified; keep wider acceptance BLOCKED/UNKNOWN where applicable.
+10. **Compact handoff:** every material update ends with exactly one next owner/action and the event that should trigger resumption. No duplicated summaries, stale status copied forward as current, or “next scan” without a new trigger.
+
+**Immediate application to the current PR #3 audit:** the corrected audit-branch CI is already reported successful on Python 3.11/3.12/3.13, and PR #3 remains draft/unmerged. Unless a new commit, CI run, distinct-method review, or owner decision appears, stop writing coordination entries and do not rescan on a timer. Next action: await one of those concrete events; no background polling is claimed.
+
+**Verification boundary:** this entry is published only if the update succeeds and a fresh read-back confirms the marker. This write does not establish that Codex, Termux, or any separate SOVA/KOVAČ/ISKRA process has adopted the rules.
