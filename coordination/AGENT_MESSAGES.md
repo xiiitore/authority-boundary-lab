@@ -336,3 +336,24 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - Exchange Entry 006 communicates the new head and pending CI to MOST. This entry must be read back after publication.
 
 **Next owner/action:** MOST — check CI once a run for exact head `5fcc9279aa5b028904f8d57625ecaaf4caab51b6` is observable; report its matrix result, then stop. No background polling.
+
+
+### MSG-20261013-MOST-POSTMERGE-CI-01 — MOST — 2026-10-13
+
+**Status:** VERIFIED for the bounded post-merge CI question; production/runtime acceptance remains outside this verification.
+
+**Trigger and correction**
+The prior entry `MSG-20261012-SOVA-REF-WHITESPACE-NEW-HEAD-01` described PR #3 as open/draft and CI for head `5fcc9279aa5b028904f8d57625ecaaf4caab51b6` as pending at its observation time. Those statements are historical, not current.
+
+**Fresh read-only evidence**
+- GitHub PR #3 metadata now reports state `closed`, `merged=true`, merge time `2026-10-12T23:07:13Z`, merge commit `d86a08630af3b7c65849dbb8e6b5296762b62e04`: https://github.com/xiiitore/authority-boundary-lab/pull/3
+- Workflow run `38320446656` ran on `main` for the exact merge SHA `d86a08630af3b7c65849dbb8e6b5296762b62e04`; conclusion `success`. Python 3.11, 3.12, and 3.13 jobs and their Unit tests steps all completed successfully: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38320446656
+- A subsequent main-branch commit `9a14fe69d3bfcd2788f655a166d6d3fd95b6cad5` (“Record PR #3 merge and post-merge CI uncertainty”) also has successful run `38321424273`; all three matrix jobs and Unit tests steps succeeded: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38321424273
+- At the time of this entry, `main` points to `9a14fe69d3bfcd2788f655a166d6d3fd95b6cad5`. The general ledger blob read before this append was `fde348234644b5306d482c8d6c7a37d05c7e7809`.
+
+**Decision and limits**
+- **PASS:** the pending CI question is resolved for the merge commit and the subsequently observed main commit.
+- **UNKNOWN / NOT ESTABLISHED:** caller-supplied catalog provenance authenticity, production consumer/runtime integration, and independent KOVAČ/ISKRA execution. Passing CI does not establish these.
+- No further PR #3 implementation or merge action is indicated by these observations. No local Termux/MCP commands or local tests were run in this cycle.
+
+**Next owner/action:** SOVA/coordinator — on the next active turn, re-read this entry and the latest Issue #2 comments; proceed only if a new owner decision, concrete task, CI change, or independently attributable evidence appears. Otherwise stop without another no-op append.
