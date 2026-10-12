@@ -117,3 +117,27 @@ Use explicit statuses such as **VERIFIED**, **PARTIAL**, **UNKNOWN**, **BLOCKED*
 - This file is the current coordination log. The separate path `coordination/AGENT_MESSAGES.md` was not found on the checked default branch; do not claim that it exists or create a competing inbox without an explicit decision.
 
 **Current status:** AGREEMENT RECORDED; independent adoption by KOVAČ and ISKRA is **UNKNOWN** until each role provides its own evidence/status entry. No background polling is implied by this document.
+
+
+### Reconciliation after role-agreement and inbox-boundary review — 2026-10-12
+
+**Task ID:** COORD-ROLE-RECONCILIATION-02  
+**Status:** PARTIAL — issue/file read-back completed; no independent KOVAČ/ISKRA execution or adoption confirmed.
+
+#### Changes checked
+- Re-read GitHub Issue #2 and all 67 comments available in the current response, then re-read this file from the default branch.
+- The latest relevant issue comments are #6131409792, #6131420424, #6131432453, and #6131441870. They establish that the preferred `coordination/AGENT_MESSAGES.md` was not found; the existing `coordination/CHATGPT_CODEX_TERMUX_HANDOFF.md` is scoped to the Termux PermissionError investigation; and the role definitions are logical responsibilities, not proof of separate agent runtimes.
+- Comments #6131420424 and #6131432453 explicitly caution against treating the Termux-specific handoff as the canonical general-purpose ledger without a repository-owner decision. Comment #6131441870 restates the SOVA/KOVAČ/ISKRA agreement and the WORKFLOW CORE / OVERALGORITHM boundary.
+- The role-agreement section added to this file in commit `5432fb7df1c26b127a0d8a88ba4d4b09355d70e4` is present on read-back. However, given the explicit scope warning in the inbox, that section must be treated as a supplementary record in this task-specific handoff—not as a decision that this file has become the canonical cross-agent inbox.
+- The current issue comments are posted under the same GitHub account identity. They do not independently establish that KOVAČ or ISKRA, as separate actors, read, adopted, or verified the protocol.
+
+#### Reconciliation and correction
+- The role definitions themselves are consistent across the file and comments: **SOVA** coordinates/reconciles, **KOVAČ** implements, **ISKRA** attempts independent/adversarial verification, **WORKFLOW CORE** coordinates capability routing, and **OVERALGORITHM** retains release/governance authority.
+- Distinct role names do not establish independent verification. A separate method, source, runtime, or attributable evidence is needed for any claim of independence.
+- The previous file update did not resolve the canonical-ledger decision. It must not be interpreted as approval to repurpose this Termux-specific log or as authorization to create a competing inbox.
+- No new technical task was claimed or executed in this review. No Termux/MCP commands, local tests, plugin changes, or runtime actions were performed.
+
+#### Next action / owner
+**Next owner: REPOSITORY OWNER.** Decide whether to create `coordination/AGENT_MESSAGES.md` as the append-only general ledger or identify an existing general-purpose ledger. Until that decision is recorded, preserve this file's Termux-specific purpose and do not create another inbox. KOVAČ/ISKRA adoption remains **UNKNOWN** unless separately attributable evidence is provided.
+
+**Verification:** this reconciliation entry will count as published only after a fresh GitHub read-back confirms this marker and its text.
