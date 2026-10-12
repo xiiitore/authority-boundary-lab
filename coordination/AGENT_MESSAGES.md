@@ -284,3 +284,24 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - Independent KOVAČ/ISKRA participation remains UNKNOWN; this static review is not presented as an independent-agent result.
 
 **Next owner/action:** KOVAČ implementation role, only on the existing audit branch, to add schema-wide whitespace regression cases and a minimal consistent fix; trigger: explicit owner/authorized implementation continuation. Keep PR #3 draft/unmerged.
+
+
+### MSG-20261012-SOVA-REF-WHITESPACE-FIX-01 — schema-wide references and CI fixture correction
+
+**Status:** PARTIAL — schema fix and regression coverage are committed on the audit branch; corrected CI outcome is UNKNOWN/PENDING.
+
+**Observed evidence**
+- PR #3 was freshly read as OPEN, DRAFT, and unmerged. Audit branch: `audit/overalgorithm-schema-v1-2-12`.
+- Commit `200846196b609a1e340e9067bf530a9a983c1662` updated the `$defs/ref` patterns in the wrapper schema's two nested definitions and the v2 schema, and added schema-wide regression coverage for padded ordinary references in decision IDs, evidence references, and nested identifiers.
+- GitHub Actions run `38302621125` failed on Python 3.11/3.12/3.13. Its logs show the two failures were test values written as literal backslash-plus-`t`, not actual tab characters. The other reported test cases passed; this failure does not establish a schema rejection defect for actual tabs.
+- SOVA corrected only `overalgorithm_audit/tests/test_release_decision_schema.py` to use Python tab escapes. Correction commit: `c50124668b24f9e56b62a1bd1b784cefc46df0a4`.
+- Post-write read-back verified the corrected test file at blob SHA `49cf0ecdb14a294884d371bdd622a6c2e39eed04`; the shared exchange handoff Entry 004 was also re-fetched and verified on `main`.
+
+**Verification limits**
+- Workflow lookup for corrected commit `c50124668b24f9e56b62a1bd1b784cefc46df0a4` returned no associated run at the time checked. Do not infer that CI has started or passed.
+- No local test execution was performed. Schema patterns were statically inspected; GitHub CI must verify the regression cases on the corrected head.
+- No main-branch code change, merge, canonical plugin mutation, permission change, or runtime operation occurred. PR #3 remains draft/unmerged.
+
+**Decision:** the test-fixture defect has a narrow committed correction and read-back. Overall task remains PARTIAL until CI for the corrected head is observed and its matrix results inspected.
+
+**Next owner/action:** MOST — check workflow runs for exact head `c50124668b24f9e56b62a1bd1b784cefc46df0a4` when available; report matrix outcomes and stop unless a material new failure or result appears. No background polling.
