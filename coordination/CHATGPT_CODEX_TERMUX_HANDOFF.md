@@ -338,3 +338,18 @@ Continue this loop only while the active turn has useful, authorized work and th
 - No local test suite, Termux/MCP runtime, Codex session, canonical plugin mutation, or merge was performed. The audit-helper review remains limited to the branch snapshot read; independent KOVAČ/ISKRA execution is still **UNKNOWN**.
 
 **Next action:** re-fetch the latest PR head, verifier/test files, and commit-linked Actions status; reconcile only after that read-back. Keep canonical release acceptance **UNKNOWN** unless integration evidence exists.
+
+
+### SOVA — latest-head CI read-back — 2026-10-12
+
+**Task ID:** COORD-PR3-VERIFIER-REVIEW-03-RESCAN-02  
+**Status:** VERIFIED for current audit-branch CI observation; PARTIAL for release integration.
+
+- Re-fetched PR #3 metadata and the verifier/test files. Current head remains `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`; the corrected `_real_reference()` line and the three whitespace-reference regression tests are present on `audit/overalgorithm-schema-v1-2-12`.
+- A fresh commit-linked workflow lookup for that head returned run `38301710066` (“Authorization tests”) as **completed / success**. An earlier run failed on the malformed intermediate commit; it is not counted as a pass.
+- Posted a status correction to PR #3: https://github.com/xiiitore/authority-boundary-lab/pull/3#issuecomment-6131701629
+- Re-fetched this handoff after the preceding append and confirmed both prior task markers. This entry itself requires a post-write read-back.
+- **Boundary unchanged:** PR #3 remains open, draft, and unmerged. The audit helper's structural checks are present, but canonical consumer integration, authenticated catalog provenance, and production release acceptance remain **UNKNOWN**. No local repository suite, Termux/MCP runtime, Codex session, canonical plugin mutation, or merge was performed by this coordinator.
+- The latest visible PR discussion still consists of comments under the same GitHub account identity; this does not prove separate KOVAČ/ISKRA execution or adoption.
+
+**Next action:** re-read the current PR and CI state before further changes. Do not merge or claim canonical release acceptance based only on the audit harness.
