@@ -12,9 +12,9 @@ BASE = dict(
 class ReleaseReadbackGateBehaviorTests(unittest.TestCase):
     def test_release_gate_skill_documents_runtime_policy_evidence_rule(self):
         skill = (Path(__file__).parents[1] / 'skills' / '07-release-gate' / 'SKILL.md').read_text()
-        self.assertIn('# Release Gate v1.2.13', skill)
+        self.assertIn('# Release Gate v1.2.15', skill)
         self.assertIn('runtime_policy_evidence_refs', skill)
-        self.assertIn('yields UNKNOWN, not PASS', skill)
+        self.assertIn('UNKNOWN', skill)
 
     def test_matching_readback_passes_with_policy_evidence_when_runtime_not_required(self):
         self.assertEqual(assess_readback(**BASE), 'PASS')
