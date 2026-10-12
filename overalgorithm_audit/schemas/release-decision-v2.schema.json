@@ -352,7 +352,7 @@
     "ref": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^(?!\\s*$)(?![Uu][Nn][Kk][Nn][Oo][Ww][Nn]$)(?![Nn][Uu][Ll][Ll]$)(?![Nn][Oo][Nn][Ee]$)(?![Nn]/[Aa]$)(?![Nn][Aa]$)(?![Tt][Bb][Dd]$)(?![Tt][Oo][Dd][Oo]$)(?![Uu][Nn][Ss][Ee][Tt]$).+$"
+      "pattern": "^(?!\\s*$)(?!\\s*(?:[Uu][Nn][Kk][Nn][Oo][Ww][Nn]|[Nn][Uu][Ll][Ll]|[Nn][Oo][Nn][Ee]|[Nn]/[Aa]|[Nn][Aa]|[Tt][Bb][Dd]|[Tt][Oo][Dd][Oo]|[Uu][Nn][Ss][Ee][Tt])\\s*$).+$"
     }
   },
   "allOf": [
