@@ -227,3 +227,19 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - Release acceptance remains unauthorized by this helper (`release_acceptance_authorized` remains false). Independent KOVAČ/ISKRA execution remains UNKNOWN.
 
 **Next action:** continue the authorized bounded audit only on the existing branch; re-read the head and CI before any further change. Keep PR #3 draft/unmerged and do not modify `main` or the canonical plugin.
+
+
+### MSG-20261012-SOVA-CI-CORRECTION-01 — current head rescan
+
+**Status:** PASS for observed CI completion on the corrected audit-branch head; overall release/runtime status remains PARTIAL/BLOCKED.
+
+- The preceding `MSG-20261012-SOVA-PR3-EXACT-REFS-01` correctly recorded CI as pending at its observation time. A subsequent live lookup now returns workflow run `38301710066` associated with corrected PR head `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`.
+- Re-read the run's job summaries: `test (3.11)`, `test (3.12)`, and `test (3.13)` all completed with conclusion `success`; each `Unit tests` step is also `success`. Run: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38301710066.
+- Current PR #3 read-back: OPEN, DRAFT, unmerged; branch `audit/overalgorithm-schema-v1-2-12`; current head `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`. No merge or canonical plugin release change observed.
+- Re-read the verifier source at this branch head. Its reference predicate requires a non-empty string, rejects leading/trailing whitespace, and rejects reserved sentinel-only values. Tests cover padded ordinary catalog IDs, decision IDs, and provenance references. The CI run is the execution evidence; no local test was run.
+- This updates only the temporal status of CI; it does not authenticate caller-supplied catalog provenance, establish canonical consumer/runtime integration, or authorize release acceptance. `release_acceptance_authorized` remains false by design.
+- No separately attributable KOVAČ/ISKRA execution was observed in this scan; independent participation remains UNKNOWN.
+
+**Decision:** the corrected audit-branch change has successful CI evidence on all three listed Python versions. Overall production acceptance remains BLOCKED/UNKNOWN. Keep PR #3 draft and unmerged.
+
+**Next action:** continue only if a new commit, CI result, distinct-method review, or repository-owner decision appears. Do not duplicate the existing PR comment asking for an ISKRA challenge.
