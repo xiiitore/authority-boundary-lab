@@ -85,3 +85,27 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - **NO TASK CLAIMED:** available evidence does not identify a new, unclaimed bounded implementation task with acceptance criteria. Do not invent work or duplicate the already-completed coordination review.
 
 **Next action:** a technical task should be assigned only after a concrete target is selected from the actual repository tree or a new issue with explicit acceptance criteria is provided. Until then, retain the ledger and await new evidence; no background loop is implied.
+
+
+### MSG-20261012-SOVA-RESCAN-02 — PR #3 task discovery and scan correction
+
+**Status:** PARTIAL — repository rescan completed; next implementation scope requires repository-owner authorization.
+
+**Correction to the preceding rescan**
+- The preceding `MSG-20261012-SOVA-RESCAN-01` used an incomplete path probe (`core.py`, `governance.py`, `architecture.md` returned 404) and therefore overstated the source-tree uncertainty. A fresh targeted fetch confirms `authz.py` and `test_authz.py` exist on `main`; the README describes the actual application-level authorization harness. Treat the earlier 404s as checks of wrong paths, not evidence of a repository-content discrepancy. This correction preserves the prior append-only record.
+- A concurrent coordination entry and commit `754967e9da` appeared during the scan; the ledger now records the coordinator role/active scan loop. The latest commit search also shows `b29d085` (this scan) and `c8a3471` (concurrent post-creation rescan). Re-read before every write to avoid overwriting concurrent updates.
+
+**New task evidence**
+- Issue #2 now returns 68 comments. Newest comment #6131591603 records task `COORD-PR3-SENTINEL-01` and links draft PR #3: https://github.com/xiiitore/authority-boundary-lab/pull/3.
+- PR #3 title: `Audit OVERALGORITHM v1.2.16 release-decision schemas`; state is OPEN, DRAFT, not merged, head `audit/overalgorithm-schema-v1-2-12` at `7dccf1aea55eda113fd46a6cee3d654af4a3af76`. Its stated purpose is an audit-only snapshot, explicitly not intended to merge into the product repository.
+- The latest issue/PR report says the whitespace-padded sentinel-reference defect was corrected in v1, v2, and wrapper schemas, with a regression test. GitHub Actions run `38300806571` passed on Python 3.11, 3.12, and 3.13. These are reported GitHub CI results; this session did not rerun tests locally.
+- Two material verifier boundaries remain unresolved: (1) consumer/verifier enforcement that required-gate catalogs are complete, gate IDs are unique/exact, and required flags match the canonical catalog; (2) conditional consumer-side rejection of legacy v1 PASS as current release acceptance. PR #3 remains draft/audit-only; no merge or canonical plugin release mutation is authorized by the observed evidence.
+- All observed comments remain attributed to GitHub identity `xiiitore`. Independent KOVAČ/ISKRA execution remains UNKNOWN.
+
+**Execution decision**
+- **PASS:** shared ledger exists and post-write read-back has confirmed its entries.
+- **PARTIAL:** the known schema-only defect appears fixed and CI passed on the audit branch, according to the recorded GitHub evidence.
+- **BLOCKED pending owner decision:** do not expand PR #3 or add verifier/catalog implementation until the repository owner explicitly chooses whether to authorize that scope on the audit-only branch or keep both findings as documented consumer requirements. Do not merge PR #3 or change the canonical plugin.
+- No source files, schemas, tests, releases, permissions, or runtime settings were changed in this scan; this entry is coordination documentation only.
+
+**Next owner:** REPOSITORY OWNER. Choose one: (A) authorize a bounded verifier/catalog contract plus adversarial tests on PR #3's audit-only branch, keeping it unmerged; or (B) retain both findings as documented consumer requirements and stop implementation. After the decision, re-scan the PR head and CI before acting.
