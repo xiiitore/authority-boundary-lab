@@ -24,7 +24,8 @@ _SENTINEL_RE = re.compile(
 
 
 def _real_reference(value):
-    return (isinstance(value, str) and bool(value.strip()) and value == value.strip()\n            and not _SENTINEL_RE.fullmatch(value))
+    return (isinstance(value, str) and bool(value.strip()) and value == value.strip()
+            and not _SENTINEL_RE.fullmatch(value))
 
 
 def _catalog_entries(catalog, task_class):
