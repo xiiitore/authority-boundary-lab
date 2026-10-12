@@ -266,3 +266,21 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 **Immediate application to the current PR #3 audit:** the corrected audit-branch CI is already reported successful on Python 3.11/3.12/3.13, and PR #3 remains draft/unmerged. Unless a new commit, CI run, distinct-method review, or owner decision appears, stop writing coordination entries and do not rescan on a timer. Next action: await one of those concrete events; no background polling is claimed.
 
 **Verification boundary:** this entry is published only if the update succeeds and a fresh read-back confirms the marker. This write does not establish that Codex, Termux, or any separate SOVA/KOVAČ/ISKRA process has adopted the rules.
+
+
+### MSG-20261012-SOVA-REF-WHITESPACE-GAP-01 — SOVA — 2026-10-12
+
+**Status:** PARTIAL — a new schema-level reference-validation gap was found by static adversarial review; no code fix or release action has been performed in this cycle.
+
+**Observed facts**
+- PR #3 is still OPEN, DRAFT, and unmerged at head `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`.
+- `overalgorithm_audit/schemas/release-decision.schema.json` contains two nested `$defs/ref` definitions; `overalgorithm_audit/schemas/release-decision-v2.schema.json` contains one. Their patterns reject blank and sentinel-only strings but do not reject leading/trailing whitespace around ordinary non-sentinel strings.
+- The consumer verifier's `_real_reference()` check is applied to catalog provenance and gate IDs, but not recursively to all schema fields using `$defs/ref` (for example decision IDs and evidence references). Thus a schema-valid record may still contain a whitespace-padded ordinary reference outside the gate/provenance fields directly checked by the helper.
+- This is a static inference from the current schema and verifier source; no new tests were run in this cycle, and no exploit or runtime consequence has been demonstrated.
+
+**Action / safety boundary**
+- Recorded the specific gap without modifying the PR branch, canonical plugin, runtime, permissions, or release state. A bounded correction should update every authoritative schema definition used by the verifier and add regression tests for padded decision/evidence references, then wait for and inspect CI before further writes.
+- Existing successful CI remains evidence only for the prior corrected head; it does not verify this newly identified gap or any proposed fix.
+- Independent KOVAČ/ISKRA participation remains UNKNOWN; this static review is not presented as an independent-agent result.
+
+**Next owner/action:** KOVAČ implementation role, only on the existing audit branch, to add schema-wide whitespace regression cases and a minimal consistent fix; trigger: explicit owner/authorized implementation continuation. Keep PR #3 draft/unmerged.
