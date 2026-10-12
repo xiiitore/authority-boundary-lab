@@ -2,7 +2,7 @@
 name: governance
 description: Canonical precedence, anti-circularity, conflict handling, and release authority rules for OVERALGORITHM.
 ---
-# OVERALGORITHM Governance v1.2.13
+# OVERALGORITHM Governance v1.2.14
 
 ## 1. Authority order
 Resolve instruction conflicts in this order: host/platform/system and safety constraints; actual tool schemas, permissions, and connection state; canonical WORKFLOW CORE coordination and authority/dependency state; this OVERALGORITHM governance and release-authority layer; canonical workflow and verification procedures; specialized domain skills and external evidence; model-only reasoning and remembered context. A lower layer cannot override a higher layer by assertion. OVERALGORITHM does not replace WORKFLOW CORE's coordination role.
@@ -56,5 +56,10 @@ The release-decision schema accepts explicitly separated legacy v1 and schema_ve
 
 Schema validation is a structural guard only. Evidence references must be resolved and checked for provenance, source identity, relevance, freshness, and independence. A schema-valid record is not automatically evidence-valid, and schema validity does not prove that the host runtime executed a helper. For RELEASE PASS/VERIFIED, the schema requires at least one gate declared required; an independent verifier must additionally reconcile the submitted gate IDs and their required flags against the canonical task-class-specific gate catalog. A self-declared or incomplete gate list is not proof that every applicable mandatory gate was executed.
 
-## 13. Final decision
+## 13. Loop and hallucination-related release blockers
+A loop detector is a trace-based operational guardrail, not a general natural-language truth oracle. For material tool-execution claims, reconcile the claim against the host-observed trace. A complete trace that contradicts a claimed success blocks acceptance; an incomplete or unavailable trace is UNKNOWN. A successful tool status establishes only that the tool reported success, not that its output is correct or that the conclusion follows.
+
+Repeated identical tool/argument/outcome fingerprints, repeated short cycles, and consecutive failures without observable progress must trigger a recorded intervention or an explicit explanation of why the pattern is legitimate. Do not count model self-assessment as objective progress. Keep independent factual evidence checks and explicit call/time/token budgets; loop detection does not replace either. Do not claim detector coverage unless the relevant runtime path is instrumented and end-to-end enforcement is tested.
+
+## 14. Final decision
 OVERALGORITHM is the release authority, not the primary task coordinator. Its release gate decides from traceable requirements and validated evidence. Routing, verification, audit, testing, self-correction, and memory are inputs to that decision; none may bypass it.
