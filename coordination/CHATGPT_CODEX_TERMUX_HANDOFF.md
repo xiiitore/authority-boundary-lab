@@ -291,3 +291,35 @@ Continue this loop only while the active turn has useful, authorized work and th
 2. Re-scan Issue #2 once for a concurrent comment.
 3. Route the PR #3 decision to the repository owner in the PR/issue context; do not make audit-branch implementation changes without that decision.
 4. Keep runtime claims and KOVAČ/ISKRA independence marked **UNKNOWN** unless direct evidence arrives.
+
+
+### SOVA — active-turn coordination and verifier follow-up — 2026-10-12
+
+**Message ID:** MSG-20261012-SOVA-COORD-03  
+**Task ID:** COORD-PR3-VERIFIER-REVIEW-03  
+**Status:** PARTIAL — audit-branch contract reviewed; canonical release integration remains UNKNOWN.
+
+#### Scope and authority
+- The repository owner explicitly asked in this active turn to continue coordination using this linked file and follow the SOVA/KOVAČ/ISKRA workflow. This entry records that active-turn instruction only; it does not claim this file is a general-purpose canonical inbox, and it does not authorize a PR merge or canonical plugin release.
+- WORKFLOW CORE remains the primary coordinator; OVERALGORITHM retains release/governance authority. The role names do not prove separate agents or independent execution.
+
+#### Scan and evidence
+- Re-read the current handoff file, Issue #2 and its latest comments, PR #3 metadata/comments, the PR changed-file list, the verifier helper, its tests, and the commit-linked Actions result.
+- PR #3 head reported by GitHub: `89a8e157453cdf98fbef3e2e0405a413c4bb08af`, commit message “Fix whitespace sentinel regex in catalog verifier”.
+- Read `overalgorithm_audit/algorithms/release_decision_verifier.py` and `overalgorithm_audit/tests/test_release_decision_verifier.py` from `audit/overalgorithm-schema-v1-2-12`.
+- Commit-linked GitHub Actions run `38301448495` (“Authorization tests”) reports completed/success.
+- A separate small logic sanity check of the fetched reference-validation rule rejected exact/padded sentinels, whitespace-only references, and padded real references; it accepted a concrete unpadded reference. This was not execution of the repository test suite.
+- Review note posted to PR #3: https://github.com/xiiitore/authority-boundary-lab/pull/3#issuecomment-6131691225
+
+#### Reconciliation
+1. **PASS within the audit helper:** it checks the supplied task-class gate catalog; rejects duplicate catalog/decision IDs; detects missing/extra gate IDs and required-flag mismatches; and requires boolean flags.
+2. **PASS within the audit helper:** a legacy v1 record is blocked from current acceptance; the helper always reports `release_acceptance_authorized: false`.
+3. **PASS for the sentinel case:** `_real_reference` rejects surrounding whitespace and reserved sentinel strings.
+4. **LIMITATION:** the catalog and its provenance reference are caller-supplied and not authenticated by this helper. Its PASS means structural contract match only. The PR is still audit-only; integration into the canonical consumer and enforcement in an actual release path remain UNKNOWN.
+5. No new code was changed by this coordinator review. No repository-local test suite, Codex session, Termux/MCP runtime, canonical plugin mutation, or merge was performed. The successful Actions result is GitHub CI evidence, not a local execution claim.
+6. The prior unresolved scope boundary is preserved: this review does not convert PR #3 into a canonical release or imply independent KOVAČ/ISKRA execution. No separately attributable response from those roles was observed.
+
+#### Next action
+- Keep PR #3 draft and unmerged.
+- Next useful technical step, if authorized, is a narrowly scoped adversarial review of the audit helper's edge cases and the exact legacy-v1 detection boundary; do not claim production enforcement without evidence from the canonical consumer.
+- On the next active turn, re-scan the file, Issue #2, and PR #3 before taking further action. No background polling is implied.
