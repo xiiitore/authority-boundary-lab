@@ -265,3 +265,29 @@ Continue this loop only while the active turn has useful, authorized work and th
 - **DEDUPLICATION / SCOPE:** this PR #3 item is distinct from the Termux PermissionError investigation. Because this file remains task-specific, I am not copying the PR #3 work log here or declaring this file the general inbox. The comment itself assigns the next decision to the repository owner: authorize a testable catalog/verifier contract on the audit branch, or retain the findings as consumer requirements. No such authorization is inferred from the comment.
 - **Execution boundary:** no Codex/Termux runtime commands or tests were run. No PR was merged, no release changed, and no new PR #3 code was written by this coordinator cycle.
 - **Next action:** repository owner should resolve the PR #3 scope decision in the PR/issue context. For general cross-agent messages, the canonical ledger path remains unresolved. On the next active turn, rescan the relevant inbox before claiming any work; do not treat this file as a background polling service.
+
+
+### SOVA — repeat scan / reconciliation cycle — 2026-10-12
+
+**Task ID:** COORD-REPEAT-SCAN-06  
+**Status:** PARTIAL — current file and inbox rescanned; bounded append made; final read-back pending.
+
+#### Scan observations
+- Re-fetched this document from `main`; pre-update blob SHA: `f6321c9deb6f85c9f5de79927c62762910c67c37`.
+- Re-fetched Issue #2 comments: 68 comments returned. Latest visible comment is #6131591603, `COORD-PR3-SENTINEL-01`, posted under the repository owner's GitHub account.
+- That comment reports an audit-only PR #3 branch `audit/overalgorithm-schema-v1-2-12`, schema/test updates, and a successful GitHub Actions run for head `7dccf1aea55eda113fd46a6cee3d654af4a3af76` across Python 3.11–3.13. These are **reported in the comment**, not independently re-run in this scan.
+- The same comment marks two verifier boundaries unresolved: consumer/verifier enforcement of canonical gate-catalog completeness/unique exact IDs/required flags, and conditional rejection of legacy v1 PASS as current release acceptance. PR #3 remains draft/audit-only; no merge or release change is reported.
+- The repository-owner decision requested by that comment remains the next dependency: authorize a testable catalog/verifier contract on the audit branch, or retain the findings as consumer requirements. No authorization is inferred.
+- The canonical general-purpose ledger question remains unresolved. This file's original scope is the Termux PermissionError handoff; these coordination notes do not silently change its canonical scope.
+
+#### Reconciliation
+- No newer comment from a separately attributable KOVAČ or ISKRA identity appeared in the fetched snapshot; independent adoption/execution remains **UNKNOWN**.
+- No new unclaimed Termux implementation task was evidenced in this snapshot. The PR #3 issue is separate and already has a named repository-owner decision as its next action, so this cycle does not duplicate its code changes or claim them as executed here.
+- No local checkout, Termux/MCP runtime, Codex session, tests, permissions, or plugin release were accessed or changed by this scan.
+- Correction to the previous entry: its “PENDING READ-BACK” line was an intermediate status. The following GitHub fetch confirmed marker `COORD-ACTIVE-SCAN-05-VERIFY` and the recorded text, so publication of that entry is **VERIFIED**. This new entry still requires its own post-write read-back.
+
+#### Next action
+1. Read this file back from `main` and confirm this task marker.
+2. Re-scan Issue #2 once for a concurrent comment.
+3. Route the PR #3 decision to the repository owner in the PR/issue context; do not make audit-branch implementation changes without that decision.
+4. Keep runtime claims and KOVAČ/ISKRA independence marked **UNKNOWN** unless direct evidence arrives.
