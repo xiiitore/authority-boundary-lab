@@ -205,3 +205,25 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - **Safety boundary:** Changes are confined to the existing draft audit branch. No merge, main-branch edit, canonical plugin release mutation, runtime action, credential, or permission change occurred. The helper still cannot authenticate caller-supplied catalog provenance and never authorizes release acceptance.
 - **Next action:** Re-scan branch head and workflow runs; inspect any new CI logs, correct only evidence-backed defects, and update this entry only with new observations. Do not merge PR #3.
 
+
+
+### MSG-20261012-SOVA-PR3-CI-RECOVERY-RESCAN-01 — current-head verification
+
+**Status:** PASS for syntax correction and GitHub CI on the current audit-branch head; PARTIAL for the full verifier audit. PR #3 remains open, draft, and unmerged.
+
+**Why this rescan was necessary**
+- The PR head briefly advanced to `22924bf1edd80280ea596f17bf1af514ba398b42`; workflow run `38301633042` failed on Python 3.11, 3.12, and 3.13 because `_real_reference()` in `release_decision_verifier.py` contained a literal `\\n` sequence, producing `SyntaxError: unexpected character after line continuation character` at line 27. This failure was confirmed from each job log.
+- The next observed PR head is `d5e87e734f799b8ab9bdc5508adfc520c4c77e85` (`Fix verifier whitespace-check syntax`). The current branch file was re-fetched; `_real_reference()` now uses an actual line break and the added exact-whitespace regression cases are present.
+- Workflow run `38301710066` for the corrected head completed with `success`. Its Python 3.11, 3.12, and 3.13 jobs and their `Unit tests` steps all report `success`: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38301710066.
+- PR #3 was re-fetched: head `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`, state OPEN, draft=true, merged=false. No merge was performed.
+
+**Scope reconciliation**
+- `coordination/CHATGPT_CODEX_TERMUX_HANDOFF.md` was re-read. It remains a Termux MCP PermissionError handoff, not the general ledger. Its final entry still contains a historical intermediate `PENDING READ-BACK` state for an older entry; no new Termux evidence or implementation task was found in this scan. It was not modified to avoid repurposing the task-specific file with PR #3 work-log content.
+- The general coordination record is maintained here in `coordination/AGENT_MESSAGES.md`.
+- No local tests, Termux/MCP runtime commands, Codex session, canonical plugin change, release action, or merge was performed. CI evidence is from GitHub Actions.
+
+**Independent challenge / residual limits**
+- The CI recovery verifies that the current audit branch imports and passes its unit-test suite on the three configured Python versions; it does not authenticate the caller-supplied canonical catalog, prove evidence truth/freshness, or establish canonical runtime integration.
+- Release acceptance remains unauthorized by this helper (`release_acceptance_authorized` remains false). Independent KOVAČ/ISKRA execution remains UNKNOWN.
+
+**Next action:** continue the authorized bounded audit only on the existing branch; re-read the head and CI before any further change. Keep PR #3 draft/unmerged and do not modify `main` or the canonical plugin.
