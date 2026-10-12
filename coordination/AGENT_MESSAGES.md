@@ -136,3 +136,33 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - PR #3 remains draft/audit-only. This safety priority does not resolve the repository-owner choice about the two outstanding verifier boundaries and does not authorize merging the PR, modifying the canonical plugin release, expanding permissions, or changing runtime settings.
 - No live Termux/MCP runtime was accessed and no local tests were run in this cycle. Those states remain **UNKNOWN**.
 - Next action: continue scan → reconcile → deduplicate → authority/dependency check → execute only bounded authorized work → verify → append evidence → read back/rescan. If no safe, authorized technical action is available, record the blocker and stop rather than inventing work.
+
+
+### MSG-20261012-SOVA-PR3-CATALOG-VERIFIER-01 — implementation and verification
+
+**Status:** PARTIAL — consumer-side contract implementation and CI verification passed on the audit-only PR branch. This is not release acceptance and does not authorize merge.
+
+**Pre-change scan and scope**
+- PR #3 was OPEN, DRAFT, not merged, with base `main` at `12e521d5ba783976ba64810421fe80493e5e2326` and head `7dccf1aea55eda113fd46a6cee3d654af4a3af76` before this implementation.
+- Confirmed its workflow runs `python -m unittest -v` with `PYTHONPATH=overalgorithm_audit`, and installs `jsonschema>=4.23,<5`. Existing schema validates shape but does not enforce the submitted gate list against an external task-class catalog.
+- Existing audit-only scope and explicit user authorization allow implementation on `audit/overalgorithm-schema-v1-2-12` only. `main`, canonical plugin release, and PR merge state are out of scope.
+
+**Changes made on the existing audit branch**
+- Added `overalgorithm_audit/algorithms/release_decision_verifier.py`.
+- Added `overalgorithm_audit/tests/test_release_decision_verifier.py` with adversarial cases for missing catalog/provenance, unknown task class, missing/extra/duplicate gate IDs, duplicate catalog IDs, mismatched `required` flags, invalid schema records, and legacy-v1 PASS promotion.
+- Updated `overalgorithm_audit/skills/07-release-gate/SKILL.md` to specify the consumer-side contract and the boundary that structural PASS does not authenticate evidence or authorize production release.
+- The verifier requires a caller-supplied task-class catalog and concrete catalog provenance reference. It returns UNKNOWN when catalog/provenance is absent, REVISE for gate-set/flag mismatches, BLOCKED for malformed/duplicate inputs or legacy-v1 promotion, and PASS only for structural catalog agreement. `release_acceptance_authorized` remains false in all outcomes.
+
+**Execution and correction record**
+- First CI run `38301353235` failed on all Python versions due to a whitespace-sentinel regex escaping defect; the failure was observed in the job logs, not hidden.
+- Corrected the regex in commit `89a8e157453cdf98fbef3e2e0405a413c4bb08af` and read the changed source back from the branch.
+- Final GitHub Actions run `38301448495` completed successfully on Python 3.11, 3.12, and 3.13. Each matrix job's `Unit tests` step reports `success`. Run URL: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38301448495.
+- Read-back confirmed the verifier module, adversarial test file, and updated release-gate skill exist on the PR head. This session did not run tests locally; test execution evidence is from GitHub Actions.
+
+**Independent challenge / limits**
+- The adversarial test suite checks the structural contract by negative cases and exact catalog comparison. This is a materially different check from schema-only validation, but it is not an independent external agent or proof of catalog authenticity.
+- The catalog and `catalog_evidence_ref` are supplied by the caller; the helper cannot authenticate them. Integration of this helper into any canonical consumer/runtime is NOT VERIFIED. The helper deliberately never authorizes release acceptance.
+- Legacy v1 records remain valid historical schema records but are BLOCKED by this consumer-side helper for promotion to current acceptance.
+- No canonical plugin files/releases were changed; PR #3 remains draft and unmerged. Independent KOVAČ/ISKRA execution remains UNKNOWN.
+
+**Decision:** PASS for the bounded structural implementation and its GitHub CI regression run; PARTIAL for the overall audit task; production release acceptance and canonical runtime integration remain UNKNOWN/BLOCKED pending separate evidence. Next step is a final rescan of PR head, CI, and this ledger; do not merge.
