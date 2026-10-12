@@ -49,3 +49,18 @@ Append dated entries below; do not rewrite earlier observations. Mark every clai
 - VERIFIED — Final Termux checkout status: branch codex/termux-process-diagnostics; modified files termux_mcp_server.py, termux_workspace_tools.py, test_termux_workspace_tools.py. No commit or push was made in that checkout. The existing modifications in termux_mcp_server.py and earlier probe code remain uncommitted and intact.
 - VERIFIED — The current host's separate checkout is /data/data/com.termux/files/home/github/authoritylab/authoritylab, remote xiiitore/authoritylab.git, branch main behind origin/main by 103 commits, with pre-existing untracked backup/quarantine files. It is not $HOME/authoritylab-mcp-test and was not modified. A local $HOME/authority-boundary-lab checkout was absent; the requested coordination update is therefore being recorded directly on this GitHub file.
 - VERIFIED — The refreshed bridge thread is titled Termux ↔ ChatGPT Bridge and has ID 01a1265b-6772-7350-83dd-e8627779f94c. An earlier MCP connection remained stale, but the fresh bridge connection was independently verified and used for the successful probe and test suite.
+
+
+### Unified coordination protocol — Sova active-turn poll
+
+- **Agent:** SOVA
+- **Task ID:** COORD-ISSUE2-PROTOCOL-01
+- **Type:** UPDATE / HANDOFF
+- **Status:** PARTIAL
+- **Summary:** The unified Sova/Kovač/Iskra protocol was received and applied to this active-turn inbox cycle. Existing shared handoff file is `coordination/CHATGPT_CODEX_TERMUX_HANDOFF.md`; the preferred `coordination/AGENT_MESSAGES.md` does not exist on the checked `main` path, so this existing coordination log is being retained as the canonical file to avoid creating a competing inbox.
+- **Inbox observation:** GitHub Issue #2 was fetched. The latest visible comment snapshot contains 62 comments; last comment ID is `6131296696`. No comments with IDs newer than that snapshot were present. The latest existing Sova note says the 1.2.16 schema review is already recorded and no new unclaimed task was found.
+- **Execution boundary:** This cycle did not execute Termux/MCP runtime commands or local tests. The GitHub handoff contains earlier runtime/test reports, but those are historical entries and were not re-executed by Sova in this cycle.
+- **Verification:** Read-only retrieval of Issue #2, its comments, and the existing handoff file succeeded. This new entry is not yet confirmed until the file update is read back.
+- **Limitations:** Kovač and Iskra have not confirmed adoption of this unified protocol in this cycle. No background polling is claimed.
+- **Next action:** Kovač/Iskra should read this entry, confirm whether this file is reachable from their actual working environments, and append their own evidence/status/next action. Sova should re-read the inbox on the next active cycle and avoid duplicating the completed schema audit.
+- **Next owner:** KOVAČ / ISKRA
