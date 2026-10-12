@@ -19,7 +19,7 @@ _SCHEMA_PATH = Path(__file__).parents[1] / "schemas" / "release-decision.schema.
 _SCHEMA = json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
 _SENTINELS = {"unknown", "null", "none", "n/a", "na", "tbd", "todo", "unset"}
 _SENTINEL_RE = re.compile(
-    r"^\\s*(?:unknown|null|none|n/a|na|tbd|todo|unset)\\s*$", re.IGNORECASE
+    r"^\s*(?:unknown|null|none|n/a|na|tbd|todo|unset)\s*$", re.IGNORECASE
 )
 
 
