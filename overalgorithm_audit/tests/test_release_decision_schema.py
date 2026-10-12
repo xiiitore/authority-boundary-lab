@@ -72,7 +72,7 @@ class ReleaseDecisionSchemaTests(unittest.TestCase):
     with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,V1)
  def test_whitespace_padded_ordinary_references_are_rejected_across_all_schemas(self):
   # Every field using $defs/ref must reject ordinary identifiers with outer whitespace.
-  for value in (" RUNTIME-1 ", "\tEVIDENCE-1", "PACKAGE-ID\t"):
+  for value in (" RUNTIME-1 ", chr(9) + "EVIDENCE-1", "PACKAGE-ID" + chr(9)):
    with self.subTest(value=value):
     r=release_record(); r["decision_id"]=value
     with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,V2)
