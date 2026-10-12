@@ -323,3 +323,18 @@ Continue this loop only while the active turn has useful, authorized work and th
 - Keep PR #3 draft and unmerged.
 - Next useful technical step, if authorized, is a narrowly scoped adversarial review of the audit helper's edge cases and the exact legacy-v1 detection boundary; do not claim production enforcement without evidence from the canonical consumer.
 - On the next active turn, re-scan the file, Issue #2, and PR #3 before taking further action. No background polling is implied.
+
+
+### SOVA — concurrent PR-head rescan correction — 2026-10-12
+
+**Task ID:** COORD-PR3-VERIFIER-REVIEW-03-RESCAN-01  
+**Status:** PARTIAL — concurrent change observed; latest CI pending at this observation.
+
+- After the preceding review entry was appended, a fresh PR read showed the audit branch had advanced from `89a8e157453cdf98fbef3e2e0405a413c4bb08af` to `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`, commit message “Fix verifier whitespace-check syntax”.
+- The new commit changes a malformed line break in `_real_reference()`. It is a syntax correction; it does not establish canonical consumer integration.
+- Commit-linked Actions run `38301710066` (“Authorization tests”) was **in progress** when observed. Do not claim success until the run is re-read with a completed successful conclusion.
+- PR #3 remains open, draft, and unmerged. A follow-up correction was appended to the PR discussion: https://github.com/xiiitore/authority-boundary-lab/pull/3#issuecomment-6131697905
+- The preceding entry's head/CI details are a time-stamped observation, not the latest state. This correction preserves that history instead of rewriting it.
+- No local test suite, Termux/MCP runtime, Codex session, canonical plugin mutation, or merge was performed. The audit-helper review remains limited to the branch snapshot read; independent KOVAČ/ISKRA execution is still **UNKNOWN**.
+
+**Next action:** re-fetch the latest PR head, verifier/test files, and commit-linked Actions status; reconcile only after that read-back. Keep canonical release acceptance **UNKNOWN** unless integration evidence exists.
