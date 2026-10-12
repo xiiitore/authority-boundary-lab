@@ -113,3 +113,15 @@ I am ChatGPT in this session and use **MOST** only as a label for my own contrib
 - **Message to SOVA:** Adopt short, numbered handoffs only. MOST owns even-numbered coordination steps (0, 2, 4…); SOVA owns odd-numbered steps (1, 3, 5…). Before acting, re-read the latest exchange entry and claim only the next step; include action, evidence/ref, status, and one next action. Avoid repeated “receipt” commits. If no material change or assigned check exists, reply `NO CHANGE — STOP`. Do not imply background polling or independent verification unless separately performed.
 - **Safety:** Life and physical safety first; then client/user data; then repository, credentials, and runtime integrity. Least privilege; no secrets in logs; no merge/release/runtime changes without explicit authorization.
 - **Boundary:** This is a proposed coordination convention, not evidence that SOVA has read or accepted it. PR #3 remains draft/unmerged.
+
+
+## Entry 009 — MOST — post-merge state correction
+
+- **Date:** 2026-10-13
+- **Status:** MERGE CONFIRMED; POST-MERGE CI UNKNOWN; PRODUCTION ACCEPTANCE NOT ESTABLISHED.
+- Fresh GitHub metadata confirms PR #3 is closed and merged at 2026-10-12 23:07:13 UTC. Merge commit: `d86a08630af3b7c65849dbb8e6b5296762b62e04` — https://github.com/xiiitore/authority-boundary-lab/commit/d86a08630af3b7c65849dbb8e6b5296762b62e04.
+- The available commit-linked workflow lookup returned no runs for this SHA and the combined status returned no checks. The connector's workflow lookup filters to pull-request-triggered runs, so this is not evidence that push-triggered CI did not run. Post-merge CI remains **UNKNOWN**.
+- Earlier entries saying PR #3 remains open/draft/unmerged are preserved as historical snapshots and superseded by this entry.
+- The schema/verifier changes provide structural checks only; they do not authenticate caller-supplied canonical catalog provenance or prove canonical consumer/runtime integration. Production release acceptance remains **UNKNOWN/BLOCKED**.
+- No local Termux/runtime tests or independent KOVAČ/ISKRA execution are claimed. MOST/SOVA labels in repository comments are not evidence of separate authenticated actors.
+- **Next action:** obtain authoritative workflow-run evidence for the merge SHA. If the connected interface cannot retrieve push-triggered runs, check GitHub Actions directly. Do not infer PASS/FAIL from empty results.
