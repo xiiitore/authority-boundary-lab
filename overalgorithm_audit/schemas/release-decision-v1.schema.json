@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/overalgorithm/release-decision-v1.schema.json",
+  "title": "OVERALGORITHM Legacy Release Decision v1 (historical only)",
+  "type": "object",
+  "required": [
+    "decision_id",
+    "task_class",
+    "required_gates",
+    "independent_audit",
+    "blockers",
+    "decision"
+  ],
+  "properties": {
+    "decision_id": {
+      "$ref": "#/$defs/ref"
+    },
+    "task_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "required",
+          "status",
+          "evidence_ids"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/ref"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "BLOCKED",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "minItems": 0,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/ref"
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "PASS"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "properties": {
+                "evidence_ids": {
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "required": {
+                  "const": true
+                }
+              },
+              "required": [
+                "required"
+              ]
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "not": {
+                    "const": "NOT_APPLICABLE"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "independent_audit": {
+      "type": "object",
+      "required": [
+        "status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "UNKNOWN",
+            "BLOCKED"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "independence_limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rollback_baseline_available": {
+      "type": "boolean"
+    },
+    "novelty_audit": {
+      "type": "object",
+      "required": [
+        "literature_status",
+        "evidence_ids",
+        "identifiability_status"
+      ],
+      "properties": {
+        "literature_status": {
+          "enum": [
+            "PASS",
+            "UNKNOWN",
+            "BLOCKED",
+            "FAIL"
+          ]
+        },
+        "identifiability_status": {
+          "enum": [
+            "PASS",
+            "UNKNOWN",
+            "BLOCKED",
+            "FAIL"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision": {
+      "enum": [
+        "PASS",
+        "BLOCKED",
+        "UNKNOWN",
+        "REVISE",
+        "FAIL",
+        "PARTIAL",
+        "VERIFIED",
+        "REFUTED",
+        "KILL",
+        "POTENTIAL NOVEL RESULT"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\s)(?![\\s\\S]*\\s$)(?!\\s*$)(?!\\s*(?:[Uu][Nn][Kk][Nn][Oo][Ww][Nn]|[Nn][Uu][Ll][Ll]|[Nn][Oo][Nn][Ee]|[Nn]/[Aa]|[Nn][Aa]|[Tt][Bb][Dd]|[Tt][Oo][Dd][Oo]|[Uu][Nn][Ss][Ee][Tt])\\s*$).+$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "enum": [
+              "PASS",
+              "VERIFIED"
+            ]
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "required_gates": {
+            "items": {
+              "if": {
+                "properties": {
+                  "required": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "required"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  },
+                  "evidence_ids": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          },
+          "blockers": {
+            "maxItems": 0
+          },
+          "independent_audit": {
+            "properties": {
+              "status": {
+                "const": "PASS"
+              },
+              "evidence_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "POTENTIAL NOVEL RESULT"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "required": [
+          "novelty_audit"
+        ],
+        "properties": {
+          "novelty_audit": {
+            "properties": {
+              "literature_status": {
+                "const": "PASS"
+              },
+              "identifiability_status": {
+                "const": "PASS"
+              },
+              "evidence_ids": {
+                "minItems": 1
+              }
+            }
+          },
+          "required_gates": {
+            "items": {
+              "if": {
+                "properties": {
+                  "required": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "required"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  },
+                  "evidence_ids": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          },
+          "blockers": {
+            "maxItems": 0
+          },
+          "independent_audit": {
+            "properties": {
+              "status": {
+                "const": "PASS"
+              },
+              "evidence_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

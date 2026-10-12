@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "overalgorithm-engine",
+  "version": "1.2.16",
+  "description": "Governance and release authority for evidence-first workflows: precedence, mandatory gates, anti-circularity, conflict handling, and evidence-supported acceptance decisions.",
+  "author": {"name": "Ivan B", "email": "ivan.bunardzija@gmail.com"},
+  "keywords": [],
+  "skills": "./skills",
+  "extensions": {"com.openai": {"interface": {"capabilities": ["Interactive"], "category": "Developer Tools", "defaultPrompt": ["Use WORKFLOW CORE as the primary coordinator for classification, capability routing, authority checks, and dependency ordering.", "Use OVERALGORITHM as the governance and release authority: enforce precedence, mandatory evidence gates, anti-circular verification, and explicit status decisions.", "Do not accept domain-plugin output without relevant validation; do not duplicate tool calls unless they add independent evidence or resolve a required uncertainty.", "Never let self-correction, memory, repetition, or model confidence certify its own result. Critical changes require regression, independent audit, and a rollback baseline.", "For structured release decisions, validate the evidence-backed record against the release-decision schema; schema validity is not proof that evidence is true.", "Distinguish package-level PACKAGE_PASS from release-level PASS or VERIFIED. Legacy decision records are historical and cannot satisfy v2 release acceptance."], "developerName": "Ivan B", "displayName": "OVERALGORITHM", "longDescription": "Governance layer for precedence, evidence gates, conflict handling, anti-circular verification, and strict release decisions with a machine-checkable evidence-backed decision record.", "shortDescription": "Governance and release authority"}}}
+}

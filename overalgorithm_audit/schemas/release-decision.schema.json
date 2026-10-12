@@ -1,0 +1,965 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/overalgorithm/release-decision.schema.json",
+  "title": "OVERALGORITHM Release Decision (legacy v1 or explicit v2)",
+  "oneOf": [
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://example.invalid/overalgorithm/release-decision-v1.schema.json",
+      "title": "OVERALGORITHM Legacy Release Decision v1 (historical only)",
+      "type": "object",
+      "required": [
+        "decision_id",
+        "task_class",
+        "required_gates",
+        "independent_audit",
+        "blockers",
+        "decision"
+      ],
+      "properties": {
+        "decision_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "task_class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "required",
+              "status",
+              "evidence_ids"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/ref"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "evidence_ids": {
+                "type": "array",
+                "minItems": 0,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/ref"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "evidence_ids": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "required": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "required"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "status": {
+                      "not": {
+                        "const": "NOT_APPLICABLE"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "independent_audit": {
+          "type": "object",
+          "required": [
+            "status",
+            "evidence_ids"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "PASS",
+                "FAIL",
+                "UNKNOWN",
+                "BLOCKED"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "minItems": 0,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "independence_limitations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rollback_baseline_available": {
+          "type": "boolean"
+        },
+        "novelty_audit": {
+          "type": "object",
+          "required": [
+            "literature_status",
+            "evidence_ids",
+            "identifiability_status"
+          ],
+          "properties": {
+            "literature_status": {
+              "enum": [
+                "PASS",
+                "UNKNOWN",
+                "BLOCKED",
+                "FAIL"
+              ]
+            },
+            "identifiability_status": {
+              "enum": [
+                "PASS",
+                "UNKNOWN",
+                "BLOCKED",
+                "FAIL"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/ref"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "decision": {
+          "enum": [
+            "PASS",
+            "BLOCKED",
+            "UNKNOWN",
+            "REVISE",
+            "FAIL",
+            "PARTIAL",
+            "VERIFIED",
+            "REFUTED",
+            "KILL",
+            "POTENTIAL NOVEL RESULT"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "$defs": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!\\s)(?![\\s\\S]*\\s$)(?!\\s*$)(?!\\s*(?:[Uu][Nn][Kk][Nn][Oo][Ww][Nn]|[Nn][Uu][Ll][Ll]|[Nn][Oo][Nn][Ee]|[Nn]/[Aa]|[Nn][Aa]|[Tt][Bb][Dd]|[Tt][Oo][Dd][Oo]|[Uu][Nn][Ss][Ee][Tt])\\s*$).+$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "enum": [
+                  "PASS",
+                  "VERIFIED"
+                ]
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          },
+          "then": {
+            "properties": {
+              "required_gates": {
+                "items": {
+                  "if": {
+                    "properties": {
+                      "required": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "required"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "status": {
+                        "const": "PASS"
+                      },
+                      "evidence_ids": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "blockers": {
+                "maxItems": 0
+              },
+              "independent_audit": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  },
+                  "evidence_ids": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "POTENTIAL NOVEL RESULT"
+              }
+            },
+            "required": [
+              "decision"
+            ]
+          },
+          "then": {
+            "required": [
+              "novelty_audit"
+            ],
+            "properties": {
+              "novelty_audit": {
+                "properties": {
+                  "literature_status": {
+                    "const": "PASS"
+                  },
+                  "identifiability_status": {
+                    "const": "PASS"
+                  },
+                  "evidence_ids": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "required_gates": {
+                "items": {
+                  "if": {
+                    "properties": {
+                      "required": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "required"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "status": {
+                        "const": "PASS"
+                      },
+                      "evidence_ids": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "blockers": {
+                "maxItems": 0
+              },
+              "independent_audit": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  },
+                  "evidence_ids": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://example.invalid/overalgorithm/release-decision-v2.schema.json",
+      "title": "OVERALGORITHM Release Decision v2",
+      "type": "object",
+      "required": [
+        "schema_version",
+        "decision_id",
+        "task_class",
+        "decision_scope",
+        "final_status",
+        "runtime_policy",
+        "runtime_status",
+        "runtime_evidence_refs",
+        "runtime_policy_evidence_refs",
+        "package_checks",
+        "readback_checks",
+        "required_gates",
+        "independent_audit",
+        "blockers"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 2
+        },
+        "decision_id": {
+          "$ref": "#/$defs/ref"
+        },
+        "task_class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_scope": {
+          "enum": [
+            "PACKAGE",
+            "RELEASE"
+          ]
+        },
+        "final_status": {
+          "enum": [
+            "PACKAGE_PASS",
+            "PASS",
+            "BLOCKED",
+            "UNKNOWN",
+            "REVISE",
+            "FAIL",
+            "PARTIAL",
+            "VERIFIED",
+            "REFUTED",
+            "KILL"
+          ]
+        },
+        "runtime_policy": {
+          "enum": [
+            "REQUIRED",
+            "NOT_REQUIRED",
+            "UNKNOWN"
+          ]
+        },
+        "runtime_status": {
+          "enum": [
+            "PASS",
+            "NOT_RUN",
+            "UNKNOWN",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "runtime_evidence_refs": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "runtime_policy_evidence_refs": {
+          "type": "array",
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ref"
+          }
+        },
+        "package_checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "status",
+              "evidence_refs"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/ref"
+              },
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "minItems": 0,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/ref"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "readback_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "status",
+              "evidence_refs"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/ref"
+              },
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "minItems": 0,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/ref"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "required_gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "required",
+              "status",
+              "evidence_refs"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/ref"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "status": {
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "evidence_refs": {
+                "type": "array",
+                "minItems": 0,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/ref"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "required": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "required"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "status": {
+                      "not": {
+                        "const": "NOT_APPLICABLE"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "independent_audit": {
+          "type": "object",
+          "required": [
+            "status",
+            "evidence_refs"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "UNKNOWN"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 0,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "independence_limitations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "evidence_refs": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "$defs": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!\\s)(?![\\s\\S]*\\s$)(?!\\s*$)(?!\\s*(?:[Uu][Nn][Kk][Nn][Oo][Ww][Nn]|[Nn][Uu][Ll][Ll]|[Nn][Oo][Nn][Ee]|[Nn]/[Aa]|[Nn][Aa]|[Tt][Bb][Dd]|[Tt][Oo][Dd][Oo]|[Uu][Nn][Ss][Ee][Tt])\\s*$).+$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision_scope": {
+                "const": "PACKAGE"
+              }
+            },
+            "required": [
+              "decision_scope"
+            ]
+          },
+          "then": {
+            "properties": {
+              "final_status": {
+                "enum": [
+                  "PACKAGE_PASS",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "REVISE",
+                  "FAIL",
+                  "PARTIAL"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "decision_scope": {
+                "const": "RELEASE"
+              }
+            },
+            "required": [
+              "decision_scope"
+            ]
+          },
+          "then": {
+            "properties": {
+              "final_status": {
+                "enum": [
+                  "PASS",
+                  "BLOCKED",
+                  "UNKNOWN",
+                  "REVISE",
+                  "FAIL",
+                  "PARTIAL",
+                  "VERIFIED",
+                  "REFUTED",
+                  "KILL"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "final_status": {
+                "const": "PACKAGE_PASS"
+              }
+            },
+            "required": [
+              "final_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "decision_scope": {
+                "const": "PACKAGE"
+              },
+              "package_checks": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    },
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              "blockers": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "final_status": {
+                "enum": [
+                  "PASS",
+                  "VERIFIED"
+                ]
+              }
+            },
+            "required": [
+              "final_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "decision_scope": {
+                "const": "RELEASE"
+              },
+              "package_checks": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    },
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              "readback_checks": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "status": {
+                      "const": "PASS"
+                    },
+                    "evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              "required_gates": {
+                "items": {
+                  "if": {
+                    "properties": {
+                      "required": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "required"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "status": {
+                        "const": "PASS"
+                      },
+                      "evidence_refs": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                },
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "required": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "required"
+                  ]
+                },
+                "minContains": 1
+              },
+              "independent_audit": {
+                "properties": {
+                  "status": {
+                    "const": "PASS"
+                  },
+                  "evidence_refs": {
+                    "minItems": 1
+                  }
+                }
+              },
+              "blockers": {
+                "maxItems": 0
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "runtime_policy": {
+                      "const": "REQUIRED"
+                    }
+                  },
+                  "required": [
+                    "runtime_policy"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "runtime_status": {
+                      "const": "PASS"
+                    },
+                    "runtime_evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "runtime_policy": {
+                      "const": "NOT_REQUIRED"
+                    }
+                  },
+                  "required": [
+                    "runtime_policy"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "runtime_status": {
+                      "const": "NOT_APPLICABLE"
+                    },
+                    "runtime_policy_evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "runtime_policy": {
+                      "const": "UNKNOWN"
+                    }
+                  },
+                  "required": [
+                    "runtime_policy"
+                  ]
+                },
+                "then": {
+                  "not": {
+                    "properties": {
+                      "final_status": {
+                        "enum": [
+                          "PASS",
+                          "VERIFIED"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "final_status"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "description": "Legacy v1 validates as historical format only. A consumer must never promote a v1 record to v2 release evidence."
+}
