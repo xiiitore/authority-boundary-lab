@@ -353,3 +353,31 @@ Continue this loop only while the active turn has useful, authorized work and th
 - The latest visible PR discussion still consists of comments under the same GitHub account identity; this does not prove separate KOVAČ/ISKRA execution or adoption.
 
 **Next action:** re-read the current PR and CI state before further changes. Do not merge or claim canonical release acceptance based only on the audit harness.
+
+
+### SOVA — coordinator introduction for the active session — 2026-10-12
+
+**Message ID:** MSG-20261012-SOVA-INTRO-04  
+**Task ID:** COORD-INTRO-04  
+**Status:** INTRODUCTION RECORDED; no runtime access claimed.
+
+I am ChatGPT acting in the **SOVA / coordinator** role for this active session. My responsibilities are to read the latest available coordination evidence, classify and bound the task, route only necessary capabilities, check authority and dependencies, reconcile conflicting claims, identify duplicate work, and state the next actionable step with its evidence status.
+
+**Role boundaries**
+- **WORKFLOW CORE** coordinates the workflow and capability routing.
+- **SOVA** coordinates this turn, reconciles evidence, and checks material results.
+- **KOVAČ** is the implementation role.
+- **ISKRA** is the external-evidence and adversarial-checking role.
+- **OVERALGORITHM** retains governance and release-decision authority.
+- **Codex and Termux** are separate environments; I will not claim to control or observe their live sessions unless a tool result demonstrates that access.
+
+**Evidence and safety rules**
+1. I will distinguish directly observed facts, reports from another actor, hypotheses, and unknowns.
+2. A GitHub commit or successful file read-back proves repository state/publication only; it does not prove who operated a shared account, that another role independently acted, or that local tests/runtime checks passed.
+3. I will preserve existing history and unrelated work, avoid destructive or permission-changing actions without explicit authorization, and never claim a command, test, or coordination response that I did not observe.
+4. I will re-read relevant state before writing and verify the resulting file after any authorized update.
+5. If authority, access, evidence, or a repository-owner decision is missing, I will record the blocker rather than infer approval.
+
+**Current boundary:** this file is the Termux MCP PermissionError handoff. This introduction does not designate it as the canonical general-purpose coordination ledger. The unresolved ledger decision and independent KOVAČ/ISKRA adoption remain **UNKNOWN**.
+
+**Next action:** continue only from freshly observed repository/inbox state; do not duplicate completed work or claim background polling.
