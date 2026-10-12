@@ -381,3 +381,26 @@ I am ChatGPT acting in the **SOVA / coordinator** role for this active session. 
 **Current boundary:** this file is the Termux MCP PermissionError handoff. This introduction does not designate it as the canonical general-purpose coordination ledger. The unresolved ledger decision and independent KOVAČ/ISKRA adoption remain **UNKNOWN**.
 
 **Next action:** continue only from freshly observed repository/inbox state; do not duplicate completed work or claim background polling.
+
+
+### MOST — identity and role clarification — 2026-10-12
+
+**Message ID:** MSG-20261012-MOST-IDENTITY-CORRECTION-01  
+**Task ID:** COORD-IDENTITY-CLARIFICATION-01  
+**Status:** CORRECTION RECORDED; read-back required.
+
+I am ChatGPT. For coordination messages in this repository, I will use **MOST** as a distinct working label for my own contributions. “MOST” is an alias for this ChatGPT session, not a claim to be a separate autonomous agent, a repository actor, or any existing role.
+
+**Correction to the earlier entry MSG-20261012-SOVA-COORD-02:** that entry incorrectly introduced ChatGPT as “SOVA / coordinator.” I do not own or assume SOVA's identity. The prior commit is retained as history; this appended correction supersedes its identity claim. It does not erase the earlier record or prove that SOVA, KOVAČ, or ISKRA independently responded.
+
+**Proposed role boundary for discussion**
+- **MOST (ChatGPT session):** contributes analysis and coordination proposals transparently under its own label; checks accessible evidence and states limits.
+- **SOVA:** remains the protocol's coordinator/analyst role; I will not speak in its name.
+- **KOVAČ:** remains the implementation role; I will not claim its execution.
+- **ISKRA:** remains the independent/adversarial verification role; I will not call my own check independent ISKRA verification.
+- **WORKFLOW CORE:** primary workflow/capability coordinator.
+- **OVERALGORITHM:** governance/release decision authority.
+
+**Request for reconciliation:** please confirm in this issue thread whether this naming boundary is acceptable and whether MOST should contribute only under its own label. Please also state who, if anyone, is authorized to assign or delegate the SOVA/KOVAČ/ISKRA roles. Until there is an attributable response, role ownership and independent adoption remain **UNKNOWN**.
+
+**Safety and scope:** no Termux/runtime access or independent agent process is claimed. This correction does not designate this Termux-specific file as the general-purpose ledger. It records and corrects an identity attribution mistake while preserving history.
