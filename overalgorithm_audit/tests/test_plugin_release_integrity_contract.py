@@ -5,7 +5,7 @@ ROOT=Path(__file__).parents[1]
 class PluginReleaseIntegrityContractTests(unittest.TestCase):
  def test_manifests_match_release_version(self):
   root=json.loads((ROOT/'plugin.json').read_text()); codex=json.loads((ROOT/'.codex-plugin'/'plugin.json').read_text())
-  self.assertEqual(root['name'],'overalgorithm-engine'); self.assertEqual(root['version'],codex['version']); self.assertEqual(root['version'],'1.2.14')
+  self.assertEqual(root['name'],'overalgorithm-engine'); self.assertEqual(root['version'],codex['version']); self.assertEqual(root['version'],'1.2.15')
  def test_release_transitions_are_explicit(self):
   s=(ROOT/'skills'/'07-release-gate'/'SKILL.md').read_text()
   for token in ['TARGET_RESOLVED','BASELINE_READ','PACKAGE_VALIDATED','RELEASE_RETURNED','RELEASE_READ_BACK']: self.assertIn(token,s)
