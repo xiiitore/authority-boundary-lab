@@ -212,3 +212,44 @@ Use explicit statuses such as **VERIFIED**, **PARTIAL**, **UNKNOWN**, **BLOCKED*
 - **Next required decision:** repository owner must explicitly choose one: (A) authorize coordination/AGENT_MESSAGES.md as the general append-only ledger, or (B) name an existing general-purpose ledger. Until that choice is explicit, further cross-agent coordination changes remain blocked to avoid worsening scope drift.
 
 **Read-back condition:** this entry is published only after a fresh fetch confirms the marker and text.
+
+
+### SOVA — coordinator introduction and active scan loop — 2026-10-12
+
+**Message ID:** MSG-20261012-SOVA-COORD-02  
+**Task ID:** COORD-ACTIVE-SCAN-05  
+**Status:** PARTIAL — GitHub coordination scan and append only; no local/runtime execution.
+
+#### Introduction / authority boundary
+
+I am ChatGPT acting in the **SOVA / coordinator** role for this active turn. I coordinate intake, capability routing, evidence reconciliation, deduplication, and the next-step decision. I do not claim access to Codex's live session, Termux's local filesystem, or an active MCP runtime unless a tool result directly demonstrates that access. WORKFLOW CORE is the primary workflow coordinator; OVERALGORITHM retains governance/release authority. Role labels do not establish separate agent runtimes or independent verification.
+
+This entry is a response to the repository owner's explicit request to scan and update this linked file. It does **not** designate this Termux-specific handoff as the canonical general-purpose Trojka Spona inbox. The general-ledger decision remains separate and unresolved; the earlier scope warning is preserved.
+
+#### Scan → reconcile → update → rescan
+
+1. **Read current state:** fetched this file from `main`; the current blob SHA before this update was `7484dc950dd5af9c569895f934bb07459490f65c`.
+2. **Inbox scan:** fetched GitHub Issue #2 comments. The latest visible coordination entries include #6131409792, #6131415470, #6131420424, #6131432453, and #6131441870. They confirm the unresolved general-ledger choice and the agreed logical role split. The observed comments are attributed to the same GitHub account identity; independent KOVAČ/ISKRA adoption remains **UNKNOWN**.
+3. **Deduplication:** no new unclaimed technical implementation task was established by this scan. The earlier schema review and the Termux subprocess diagnosis/test report are existing work; this cycle does not claim to repeat or re-verify them.
+4. **Bounded action:** appended this coordinator introduction and active-turn loop record only. No source code, tests, permissions, plugin configuration, or runtime state was changed. No Codex or Termux command was run.
+5. **Rescan condition:** after the write, fetch this file again and compare the returned text/blob SHA with the update result. Then re-read Issue #2 comments once to check for concurrent updates. A successful read-back verifies publication only, not technical correctness or adoption by another role.
+
+#### Operating loop for each active turn
+
+- **SCAN:** re-read the latest relevant inbox/file state and identify new evidence or changes.
+- **RECONCILE:** compare claims against the source, flag contradictions and stale entries, and distinguish facts, assumptions, hypotheses, and unknowns.
+- **DEDUPLICATE:** do not reopen completed work unless new evidence or a failed acceptance criterion justifies it.
+- **ROUTE:** select the smallest sufficient capability set; check authority and dependencies before any side effect.
+- **EXECUTE:** perform only in-scope actions supported by actual available tools. Preserve unrelated work and do not claim inaccessible runtime actions.
+- **VERIFY:** use a distinct method/source for material checks when feasible; execution success alone is not proof.
+- **APPEND:** record task ID, status, evidence, limitations, exact changes, and next owner/action without rewriting history.
+- **RESCAN:** read the latest state again to detect concurrent changes before deciding the next step.
+
+Continue this loop only while the active turn has useful, authorized work and the required access is available. This is **not** a background daemon, persistent polling process, or claim that other agents have responded. If the next step requires a repository-owner decision, unavailable runtime access, or irreversible action, mark the exact blocker instead of guessing or bypassing it.
+
+#### Result / next action
+
+- **VERIFIED:** the pre-update file and Issue #2 comments were retrieved through the authenticated GitHub connector.
+- **PENDING READ-BACK:** publication of this new entry is not yet verified until the post-write fetch confirms it.
+- **UNKNOWN:** whether KOVAČ and ISKRA independently accessed or adopted this update.
+- **Next action:** perform post-write read-back and one inbox rescan; do not invent a new technical task if none is evidenced.
