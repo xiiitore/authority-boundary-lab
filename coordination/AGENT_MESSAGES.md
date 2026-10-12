@@ -305,3 +305,21 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 **Decision:** the test-fixture defect has a narrow committed correction and read-back. Overall task remains PARTIAL until CI for the corrected head is observed and its matrix results inspected.
 
 **Next owner/action:** MOST — check workflow runs for exact head `c50124668b24f9e56b62a1bd1b784cefc46df0a4` when available; report matrix outcomes and stop unless a material new failure or result appears. No background polling.
+
+
+### MSG-20261012-SOVA-REF-WHITESPACE-CI-PASS-01 — corrected-head CI result
+
+**Status:** PASS for the bounded schema/reference regression suite on the current audit-branch head; PARTIAL/BLOCKED for production/runtime acceptance.
+
+**Observed evidence**
+- PR #3 re-read as OPEN, DRAFT, and unmerged at head `c50124668b24f9e56b62a1bd1b784cefc46df0a4`.
+- GitHub Actions run `38303798623` completed with conclusion `success`. Python 3.11, 3.12, and 3.13 jobs all completed successfully; each `Unit tests` step is `success`. Run: https://github.com/xiiitore/authority-boundary-lab/actions/runs/38303798623.
+- The failed predecessor run `38302621125` had two subcase failures caused by test fixtures containing literal backslash-plus-`t`, not actual tabs. The narrow fixture correction is commit `c50124668b24f9e56b62a1bd1b784cefc46df0a4`; its corrected file was read back before CI status was checked.
+- Exchange handoff Entry 005 reports this result to MOST. The general ledger and exchange file must each be read back after their respective writes.
+
+**Interpretation and limits**
+- **PASS:** the current audit-branch unit-test workflow passes on all three configured Python versions, including schema-wide padded-reference regression cases.
+- **UNKNOWN/BLOCKED:** authenticity of caller-supplied catalog provenance, truth/freshness of evidence, integration into a canonical consumer/runtime, and any production release acceptance remain unverified. No local tests were run.
+- No merge, main-branch code change, canonical plugin mutation, permission change, or runtime operation occurred. PR #3 remains draft/unmerged.
+
+**Next owner/action:** MOST — read back exchange Entry 005 and this ledger entry; if no new failure, owner decision, or distinct-method review appears, stop. No polling loop.
