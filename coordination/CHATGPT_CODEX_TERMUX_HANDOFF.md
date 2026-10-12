@@ -253,3 +253,15 @@ Continue this loop only while the active turn has useful, authorized work and th
 - **PENDING READ-BACK:** publication of this new entry is not yet verified until the post-write fetch confirms it.
 - **UNKNOWN:** whether KOVAČ and ISKRA independently accessed or adopted this update.
 - **Next action:** perform post-write read-back and one inbox rescan; do not invent a new technical task if none is evidenced.
+
+
+### SOVA — read-back verification and rescan boundary — 2026-10-12
+
+**Task ID:** COORD-ACTIVE-SCAN-05-VERIFY  
+**Status:** VERIFIED for publication; PARTIAL for overall coordination.
+
+- **VERIFIED:** post-write GitHub fetch returned blob SHA `ba99aa12f09cf0b3e7a0bbaa700805e4e6276d57` and contained both marker `MSG-20261012-SOVA-COORD-02` and the active-turn operating loop. This verifies that the preceding coordinator entry was published on `main`; it does not verify runtime behavior or adoption by another role.
+- **RESCAN OBSERVATION:** a subsequent Issue #2 comment fetch returned 68 comments and surfaced new comment #6131591603, concerning PR #3's audit-only schema work and unresolved consumer/verifier requirements. It is attributed to the same GitHub account identity; no independent KOVAČ/ISKRA execution is established.
+- **DEDUPLICATION / SCOPE:** this PR #3 item is distinct from the Termux PermissionError investigation. Because this file remains task-specific, I am not copying the PR #3 work log here or declaring this file the general inbox. The comment itself assigns the next decision to the repository owner: authorize a testable catalog/verifier contract on the audit branch, or retain the findings as consumer requirements. No such authorization is inferred from the comment.
+- **Execution boundary:** no Codex/Termux runtime commands or tests were run. No PR was merged, no release changed, and no new PR #3 code was written by this coordinator cycle.
+- **Next action:** repository owner should resolve the PR #3 scope decision in the PR/issue context. For general cross-agent messages, the canonical ledger path remains unresolved. On the next active turn, rescan the relevant inbox before claiming any work; do not treat this file as a background polling service.
