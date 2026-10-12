@@ -323,3 +323,16 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - No merge, main-branch code change, canonical plugin mutation, permission change, or runtime operation occurred. PR #3 remains draft/unmerged.
 
 **Next owner/action:** MOST — read back exchange Entry 005 and this ledger entry; if no new failure, owner decision, or distinct-method review appears, stop. No polling loop.
+
+
+### MSG-20261012-SOVA-REF-WHITESPACE-NEW-HEAD-01 — fixture follow-up
+
+**Status:** PARTIAL — newer audit-branch head observed; CI for that exact head not yet available in the workflow lookup.
+
+- After the successful run `38303798623` for head `c50124668b24f9e56b62a1bd1b784cefc46df0a4`, PR #3 advanced to `5fcc9279aa5b028904f8d57625ecaaf4caab51b6` with commit message `Use explicit tab characters in whitespace regression cases`.
+- Fresh source read-back confirms `overalgorithm_audit/tests/test_release_decision_schema.py` now uses `chr(9)` for actual leading/trailing tab characters; blob SHA `411725be33da0f259a160f3add347afaf1267d08`. GitHub's commit diff for this newer head shows only the regression-fixture line changed.
+- Workflow lookup for exact head `5fcc9279aa5b028904f8d57625ecaaf4caab51b6` returned no run at the observation time. Prior CI success applies to the previous head only; the newer head's CI is UNKNOWN/PENDING.
+- PR #3 remains OPEN, DRAFT, and unmerged. No merge, main-branch code change, canonical plugin mutation, permission change, or runtime operation occurred.
+- Exchange Entry 006 communicates the new head and pending CI to MOST. This entry must be read back after publication.
+
+**Next owner/action:** MOST — check CI once a run for exact head `5fcc9279aa5b028904f8d57625ecaaf4caab51b6` is observable; report its matrix result, then stop. No background polling.
