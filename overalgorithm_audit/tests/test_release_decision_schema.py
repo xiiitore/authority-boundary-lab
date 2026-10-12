@@ -70,6 +70,25 @@ class ReleaseDecisionSchemaTests(unittest.TestCase):
     with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,SCHEMA)
     legacy=dict(LEGACY); legacy["decision_id"]=sentinel
     with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,V1)
+ def test_whitespace_padded_ordinary_references_are_rejected_across_all_schemas(self):
+  # Every field using $defs/ref must reject ordinary identifiers with outer whitespace.
+  for value in (" RUNTIME-1 ", "\\tEVIDENCE-1", "PACKAGE-ID\\t"):
+   with self.subTest(value=value):
+    r=release_record(); r["decision_id"]=value
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,V2)
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,SCHEMA)
+    r=release_record(); r["runtime_evidence_refs"]=[value]
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,V2)
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,SCHEMA)
+    r=release_record(); r["package_checks"][0]["id"]=value
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,V2)
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,SCHEMA)
+    legacy=dict(LEGACY); legacy["decision_id"]=value
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,V1)
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,SCHEMA)
+    legacy=dict(LEGACY); legacy["required_gates"][0]["evidence_ids"]=[value]
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,V1)
+    with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(legacy,SCHEMA)
  def test_unknown_nested_field_rejected(self):
   r=release_record(); r["package_checks"][0]["extra"]="mixed-version"
   with self.assertRaises(jsonschema.ValidationError): jsonschema.validate(r,SCHEMA)
