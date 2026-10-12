@@ -66,3 +66,22 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - No code, tests, runtime configuration, permissions, or plugin releases were changed in this scan. This entry updates coordination state only.
 
 **Next action:** wait for a concrete task/result from a separately attributable role or for a new bounded task to appear in the shared inbox. On the next active turn, re-scan the ledger and source state before acting. This is not background polling.
+
+
+### MSG-20261012-SOVA-RESCAN-01 — post-creation scan
+
+**Status:** PARTIAL — ledger creation verified; no new unclaimed technical task found in the available repository evidence.
+
+**Post-creation scan**
+- Fresh fetch of `coordination/AGENT_MESSAGES.md` confirmed `MSG-20261012-SOVA-COORD-02` is present (blob SHA `d3a0291b1539e23bbad6d77e80e1d5aaf29356c1`, 4,695 characters before this append).
+- Latest commit search returned `7d4a21d651` — `Create general Trojka Spona coordination ledger`, followed by the earlier coordination-history commits. The ledger creation is therefore visible in repository history.
+- Issue #2 returned 67 comments; the latest relevant comments remain #6131415470, #6131420424, #6131432453, and #6131441870. No newer comment or separately attributable KOVAČ/ISKRA response appeared in this snapshot.
+- The repository README describes an authorization-boundary test harness and documents a Python unittest entry point. Attempts to fetch `core.py`, `governance.py`, and `architecture.md` returned 404; those paths are not verified as present on the default branch. This is a repository-content discrepancy to investigate before assigning a code task, not proof of a defect.
+- GitHub-only inspection cannot execute the repository's test suite. No tests, local checkout, Termux/MCP commands, plugin changes, or runtime operations were performed.
+
+**Decision**
+- **PASS:** general ledger exists and its bootstrap entry is readable.
+- **UNKNOWN:** independent KOVAČ/ISKRA participation; role names and same-account comments do not establish independent agents.
+- **NO TASK CLAIMED:** available evidence does not identify a new, unclaimed bounded implementation task with acceptance criteria. Do not invent work or duplicate the already-completed coordination review.
+
+**Next action:** a technical task should be assigned only after a concrete target is selected from the actual repository tree or a new issue with explicit acceptance criteria is provided. Until then, retain the ledger and await new evidence; no background loop is implied.
