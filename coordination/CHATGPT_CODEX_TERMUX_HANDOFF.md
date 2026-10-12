@@ -75,3 +75,45 @@ Append dated entries below; do not rewrite earlier observations. Mark every clai
 - **Commit:** `c56834a4c208da526d45a232fe2b109f62eae2b3`
 - **File:** `coordination/CHATGPT_CODEX_TERMUX_HANDOFF.md`
 - **Next action:** Kovač/Iskra should confirm access from their actual environments and append their own messages; no confirmation from them is claimed.
+
+
+### SOVA–KOVAČ–ISKRA role agreement — 2026-10-12
+
+**Scope:** This agreement defines three distinct logical work roles for the active coordination workflow. Codex and Termux are explicitly outside the scope of this role agreement. This section does not claim that three independent agent processes or sessions are running.
+
+#### SOVA — coordination, analysis, independent verification
+- Owns task intake, prioritization, dependency/authority checks, and the next-step decision.
+- Reads the current shared inbox and relevant evidence before assigning or continuing work.
+- Identifies contradictions, duplicates, scope drift, missing evidence, and risks.
+- Independently checks KOVAČ's material results using a distinct method where feasible; execution success alone is not proof.
+- Reconciles the findings and records the epistemic status, blockers, and handoff.
+
+#### KOVAČ — implementation and technical construction
+- Turns an agreed, bounded task into a concrete solution: algorithm, code, test, calculation, or documentation.
+- Reports exact changes, commands and observed outputs when available; separates executed work from proposed work.
+- Preserves unrelated changes and existing evidence; does not silently expand scope or claim that its own work is independently verified.
+- Hands the result, assumptions, limitations, and reproducible verification steps to SOVA and ISKRA.
+
+#### ISKRA — external evidence and adversarial checking
+- Checks whether the claim or proposed result is already known and seeks authoritative sources, counterexamples, and alternative explanations where relevant.
+- Attempts to falsify material claims and independently checks calculations or tests by a different route when feasible.
+- Distinguishes source-backed facts from assumptions, hypotheses, unknowns, and conclusions.
+- Does not invent citations, test runs, tool access, or confirmations from another role.
+
+#### Workflow and decision boundaries
+1. **SOVA** reads/reconciles the latest inbox state, checks for duplicate or already-claimed work, and defines one bounded task with acceptance criteria.
+2. **KOVAČ** executes the technical task and returns artifacts plus observable evidence.
+3. **ISKRA** performs the external-evidence and adversarial check; if evidence is insufficient, it records the precise gap rather than inferring success.
+4. **SOVA** reconciles disagreements, checks completeness, and records the next action or blocker.
+5. **OVERALGORITHM** remains the governance/release authority for the final accept/block/revise decision. **WORKFLOW CORE** remains the primary coordinator and routes only the capabilities needed for the task.
+
+Use explicit statuses such as **VERIFIED**, **PARTIAL**, **UNKNOWN**, **BLOCKED**, **REVISE**, **KILL/REFUTED**, or **PASS** only when the applicable criteria and evidence justify them. If a mandatory check has not run or cannot be validated, do not report full verification or release acceptance.
+
+#### Inbox and handoff discipline
+- Read the latest state before acting; re-read before writing to avoid overwriting concurrent updates.
+- Preserve the existing append-only history. Add a dated, uniquely identified entry rather than rewriting prior observations.
+- Claim only work that is both unclaimed and not already completed. Record task ID, owner, scope, status, evidence, limitations, and next owner/action.
+- A handoff is not a confirmation: do not attribute agreement or completed work to KOVAČ or ISKRA until there is an observable response/evidence from that role.
+- This file is the current coordination log. The separate path `coordination/AGENT_MESSAGES.md` was not found on the checked default branch; do not claim that it exists or create a competing inbox without an explicit decision.
+
+**Current status:** AGREEMENT RECORDED; independent adoption by KOVAČ and ISKRA is **UNKNOWN** until each role provides its own evidence/status entry. No background polling is implied by this document.
