@@ -190,3 +190,18 @@ The user explicitly renewed the instruction to scan, update, execute coordinated
 - **PARTIAL / BLOCKED:** overall release acceptance and canonical runtime integration are not established. Keep PR #3 draft and unmerged; do not treat this audit harness as the production verifier.
 
 **Next action:** repository owner retains release/merge authority. Next useful work is a read-only final rescan after any new branch/CI change, or a separately authorized integration task with explicit consumer/runtime evidence criteria. No additional code change is made by this scan.
+
+
+### MSG-20261012-SOVA-PR3-EXACT-REFS-01 — whitespace-padded identifiers
+
+**Status:** PARTIAL — static finding corrected on audit branch; regression CI for the corrected commit not yet observed.
+
+- **SCAN:** Re-read the current verifier, adversarial tests, PR discussion, and audit branch. PR #3 remains draft/unmerged; no canonical plugin/runtime change is in scope.
+- **Finding:** The verifier's reference predicate rejected padded sentinel words but still accepted whitespace-padded ordinary references. Decision gate IDs were checked only for non-emptiness, allowing a padded ID to match a padded caller-supplied catalog entry.
+- **Change:** Updated `overalgorithm_audit/algorithms/release_decision_verifier.py` to reject leading/trailing whitespace in references and decision gate IDs. Added tests for padded catalog gate IDs, padded decision gate IDs, and padded catalog provenance. Read-back confirms the changes are present.
+- **CI failure and correction:** GitHub Actions run `38301633042` failed on Python 3.11, 3.12, and 3.13 because the first code edit accidentally inserted a literal `\\n` sequence, producing a SyntaxError. Job logs were fetched and the failure identified. Corrected the source to use a real line break and read the corrected source back from the audit branch. This correction is committed as `d5e87e734f799b8ab9bdc5508adfc520c4c77e85`.
+- **Verification status:** The failed run is evidence of a regression introduced by the edit, not a pass. A workflow run for the corrected commit was not returned by the current workflow lookup; corrected CI status remains **UNKNOWN/PENDING** until a run is observed and all matrix jobs pass.
+- **Coordination:** PR comment `6131688011` records the finding and asks for a distinct-method ISKRA challenge. No separate-role response or independent execution has been observed; independence remains **UNKNOWN**.
+- **Safety boundary:** Changes are confined to the existing draft audit branch. No merge, main-branch edit, canonical plugin release mutation, runtime action, credential, or permission change occurred. The helper still cannot authenticate caller-supplied catalog provenance and never authorizes release acceptance.
+- **Next action:** Re-scan branch head and workflow runs; inspect any new CI logs, correct only evidence-backed defects, and update this entry only with new observations. Do not merge PR #3.
+
