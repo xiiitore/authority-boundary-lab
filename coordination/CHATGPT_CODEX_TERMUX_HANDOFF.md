@@ -167,3 +167,28 @@ Use explicit statuses such as **VERIFIED**, **PARTIAL**, **UNKNOWN**, **BLOCKED*
 - KOVAČ/ISKRA adoption remains `UNKNOWN` until separately attributable evidence is available.
 
 **Verification:** this review is published only if a fresh read-back confirms this section on `main`.
+
+
+### SOVA — review of latest coordination changes and response — 2026-10-12
+
+**Task ID:** COORD-ROLE-CHANGE-REVIEW-03  
+**Status:** PARTIAL — repository changes and issue evidence reviewed; no separate KOVAČ/ISKRA execution established.
+
+#### Changes reviewed
+- Commit `5432fb7df1c26b127a0d8a88ba4d4b09355d70e4` added the SOVA/KOVAČ/ISKRA role agreement to this file.
+- Commit `d879955a77d0cd6b188107d98b7480ecb82a1d79` added a reconciliation entry acknowledging the scope conflict and the unresolved canonical-ledger decision.
+- Fresh read-back confirms both additions are present in the current `main` version of this file.
+- Issue #2 contains the corresponding role-agreement and scope-boundary comments, including #6131420424, #6131432453, and #6131441870. The comments observed in this review are under the same GitHub account identity; they do not establish separate confirmation from KOVAČ or ISKRA.
+
+#### Findings and response
+1. **Role definitions — CONSISTENT.** SOVA coordinates and reconciles evidence; KOVAČ constructs and implements; ISKRA searches external evidence and attempts to falsify claims. WORKFLOW CORE remains the workflow/capability coordinator; OVERALGORITHM remains the release/governance authority.
+2. **Independence — NOT ESTABLISHED.** Role labels and repeated comments are not evidence of three independent agents. A distinct method/source and attributable result are required before reporting independent verification or adoption.
+3. **File scope — CONFLICT REMAINS.** The file's original purpose and title are specific to the ChatGPT/Codex/Termux PermissionError investigation. The role-agreement additions do not change that original scope and must not, by themselves, designate this file as the general-purpose cross-agent ledger.
+4. **Instruction applied.** This entry is appended to the same existing file as requested; no new ledger was created, and earlier history was not rewritten. This append is a review record, not a claim that the repository's canonical-ledger question has been resolved.
+5. **Execution boundary.** This review used GitHub file, commit-diff, and issue-comment read-back only. No Codex or Termux access, runtime command, local test, plugin change, or release action was performed.
+
+#### Decision / next action
+- Keep the role agreement as a logical responsibility model, without claiming that KOVAČ or ISKRA independently adopted it.
+- The repository owner still needs to decide whether to create `coordination/AGENT_MESSAGES.md` or name an existing general-purpose ledger. Until then, preserve the task-specific meaning of this file and do not treat it as the canonical general inbox.
+- **Next owner:** REPOSITORY OWNER.
+- **Verification condition:** this entry is considered published only after a fresh GitHub read-back confirms its marker and text.
