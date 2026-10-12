@@ -18,7 +18,7 @@
     "shortDescription": "Governance and release authority"
   },
   "name": "overalgorithm-engine",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "Governance and release authority for evidence-first workflows: precedence, mandatory gates, anti-circularity, conflict handling, and evidence-supported acceptance decisions.",
   "author": {
     "name": "Ivan B",
