@@ -24,7 +24,7 @@ _SENTINEL_RE = re.compile(
 
 
 def _real_reference(value):
-    return isinstance(value, str) and bool(value.strip()) and not _SENTINEL_RE.fullmatch(value)
+    return (isinstance(value, str) and bool(value.strip()) and value == value.strip()\n            and not _SENTINEL_RE.fullmatch(value))
 
 
 def _catalog_entries(catalog, task_class):
@@ -103,7 +103,7 @@ def verify_decision_contract(record, *, canonical_gate_catalog=None, catalog_evi
             return result
         gate_id = gate.get("id")
         required = gate.get("required")
-        if not isinstance(gate_id, str) or not gate_id.strip():
+        if not _real_reference(gate_id):
             result.update(status="BLOCKED", errors=["decision contains an invalid gate ID"])
             return result
         if gate_id in actual:
