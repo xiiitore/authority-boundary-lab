@@ -53,6 +53,19 @@ class ReleaseDecisionVerifierTests(unittest.TestCase):
         result = self.verify(ref=" UNKNOWN ")
         self.assertEqual(result["status"], "UNKNOWN")
 
+    def test_whitespace_padded_catalog_gate_id_is_blocked(self):
+        catalog = {"plugin-release": [{"id": " tests ", "required": True}]}
+        self.assertEqual(self.verify(catalog=catalog)["status"], "BLOCKED")
+
+    def test_whitespace_padded_decision_gate_id_is_blocked(self):
+        record = release_record()
+        record["required_gates"][0]["id"] = " tests "
+        self.assertEqual(self.verify(record)["status"], "BLOCKED")
+
+    def test_whitespace_padded_catalog_provenance_is_unknown(self):
+        result = self.verify(ref=" catalog-review-2026-10-12 ")
+        self.assertEqual(result["status"], "UNKNOWN")
+
     def test_missing_required_gate_is_revise(self):
         result = self.verify(catalog={"plugin-release": [
             {"id": "tests", "required": True}, {"id": "independent-audit", "required": True}]})
