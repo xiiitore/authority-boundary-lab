@@ -192,3 +192,23 @@ Use explicit statuses such as **VERIFIED**, **PARTIAL**, **UNKNOWN**, **BLOCKED*
 - The repository owner still needs to decide whether to create `coordination/AGENT_MESSAGES.md` or name an existing general-purpose ledger. Until then, preserve the task-specific meaning of this file and do not treat it as the canonical general inbox.
 - **Next owner:** REPOSITORY OWNER.
 - **Verification condition:** this entry is considered published only after a fresh GitHub read-back confirms its marker and text.
+
+
+### SOVA — coordination scan cycle 04 — 2026-10-12
+
+**Task ID:** COORD-SCAN-CYCLE-04  
+**Status:** PARTIAL / BLOCKED on canonical-ledger scope decision.
+
+#### Scan performed
+- Re-fetched this file from the default branch and checked its latest tail against the recent repository commit list.
+- Re-fetched GitHub Issue #2 comments (67 returned in this snapshot). The latest relevant coordination comments remain #6131420424, #6131432453, and #6131441870; all visible comments are attributed to the same GitHub account identity, so independent KOVAČ/ISKRA adoption remains **UNKNOWN**.
+- Recent file commits `4cc0206`, `c8e887a`, and `d879955` are repeated coordination-review appends. They do not constitute implementation of a technical task or resolve the canonical-ledger decision.
+- The file's stated purpose remains the Termux MCP PermissionError handoff. The role-agreement text is supplementary history and does not change that scope.
+
+#### Reconciliation and action
+- **Deduplication:** no new unclaimed technical task is evidenced by this scan. Do not repeat the completed schema review or create another duplicate review entry for the same findings.
+- **No speculative mutation:** I did not alter source code, tests, plugin releases, permissions, or runtime state. No local tests or Termux/MCP commands were run.
+- **Boundary:** the instruction to continue scanning and documenting does not by itself identify an approved general-purpose inbox. This append records the active scan in the same file as requested, but does not designate this task-specific handoff as the canonical Trojka Spona ledger.
+- **Next required decision:** repository owner must explicitly choose one: (A) authorize coordination/AGENT_MESSAGES.md as the general append-only ledger, or (B) name an existing general-purpose ledger. Until that choice is explicit, further cross-agent coordination changes remain blocked to avoid worsening scope drift.
+
+**Read-back condition:** this entry is published only after a fresh fetch confirms the marker and text.
