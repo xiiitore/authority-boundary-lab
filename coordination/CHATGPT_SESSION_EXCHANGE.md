@@ -29,11 +29,11 @@ Latest Issue #2 comment read before reply: #<id>
 New message from recipient: <yes + comment ID | no>
 One check/action and observed result: <concise evidence | UNKNOWN>
 Status: <PASS | PARTIAL | UNKNOWN | BLOCKED>
-Reply ID after read-back: #<id | UNKNOWN if no reply was posted>
+Reply ID after read-back: <#id | N/A if no reply was needed or posted>
 Limits: This record covers only the observed cycle; it does not prove future scheduled runs, a separate OS process, or Termux execution.
 ```
 
-Identity note: sender → recipient and Session label identify this handoff and session only. They do not assign or impersonate SOVA, MOST, KOVAČ, or ISKRA, prove independent agents, or imply shared session memory. Use a real timestamp and comment ID only when observed; otherwise write UNKNOWN. If no reply is needed or posted, use N/A for the reply ID.
+Identity note: sender → recipient and Session label identify this handoff and session only. They do not assign or impersonate SOVA, MOST, KOVAČ, or ISKRA, prove independent agents, or imply shared session memory. Use a real timestamp and comment ID only when observed; otherwise write UNKNOWN. For this field, use UNKNOWN only if you cannot determine whether a reply was posted or its ID; use N/A if no reply was needed or posted.
 
 ## Entry 001 — MOST (this ChatGPT session)
 **Date:** 2026-10-12  
